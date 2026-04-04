@@ -1,4 +1,4 @@
-# POLLUB thesis Typst template
+# Lublin University of Technology (pollub) thesis Typst template
 
 Your thesis is in Polish? Jump to: [polski](#polski)
 
