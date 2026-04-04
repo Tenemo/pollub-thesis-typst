@@ -46,8 +46,15 @@
     leading: body-leading,
     first-line-indent: (amount: 0.85cm, all: true),
   )
+  #set par(first-line-indent: (amount: 0cm, all: true))
   #text(size: 14pt, weight: "bold")[#title]
   #v(1.4em)
+  #set par(
+    justify: true,
+    spacing: body-par-spacing,
+    leading: body-leading,
+    first-line-indent: (amount: 0.85cm, all: true),
+  )
   #resolved-body
   #if keywords.len() > 0 [
     #v(1.4em)
@@ -84,7 +91,7 @@
   symbols-list: none,
   symbols-list-title: none,
   polish-typography: none,
-  screen-mode: false,
+  screen-mode: true,
 ) = {
   let labels = localized-labels(main-lang)
   let resolved-outline-title = resolve-label(labels, "outline-title", outline-title)

@@ -32,9 +32,9 @@
     listings, and a single APA 7 bibliography on a compact two-chapter example.
   ],
   keywords-en: ("typst", "WEII", "POLLUB", "thermoelectric cooling"),
-  // set to true for a screen-reading PDF with symmetric side margins.
-  // keep false for the final print and binding layout.
-  screen-mode: false,
+  // defaults to true for a screen-reading PDF with symmetric side margins.
+  // set to false for the final print and binding layout.
+  screen-mode: true,
 )
 
 #chapter1
