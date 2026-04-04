@@ -53,7 +53,7 @@
   title-en: [English thesis title],
   authors: ((name: "Jan Kowalski", album-number: "000000"),),
   supervisor: "Dr inż. Jan Nowak",
-  degree-label: [Praca dyplomowa \ magisterska],
+  degree-label: ([Praca dyplomowa], [magisterska]),
   field-of-study: [na kierunku Informatyka],
   diploma-block: [na bloku dyplomowania Aplikacje Internetowe],
   city: "Lublin",
@@ -66,6 +66,7 @@
   faculty-short: [WEII],
   faculty: [Wydział Elektrotechniki i Informatyki],
   title-header-image: default-title-header-image,
+  title-note: none,
   outline-title: [Spis treści],
   abstract-pl-title: [Streszczenie],
   abstract-en-title: [Abstract],
@@ -179,6 +180,7 @@
     #set page(numbering: none)
     #title-page(
       title-header-image,
+      title-note,
       university,
       faculty-short,
       faculty,

@@ -8,7 +8,7 @@
   title-en: [Characterisation of a thermoelectric cooling setup as a function of drive current],
   authors: ((name: "inż. Jan Kowalski", album-number: "123456"),),
   supervisor: "Dr inż. Jan Nowak",
-  degree-label: [Praca dyplomowa \ magisterska],
+  degree-label: ([Praca dyplomowa], [magisterska]),
   field-of-study: [na kierunku Informatyka],
   diploma-block: [na bloku dyplomowania Aplikacje Internetowe],
   city: "Lublin",
