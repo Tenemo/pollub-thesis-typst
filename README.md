@@ -1,4 +1,4 @@
-# Pollub thesis
+# POLLUB thesis Typst template
 
 Your thesis is in Polish? Jump to: [polski](#polski)
 
@@ -39,26 +39,26 @@ Current rendered preview: [template-preview.pdf](./template-preview.pdf)
 #import "../pollub-thesis-typst/lib.typ": thesis, listing
 
 #show: thesis.with(
-  main-lang: "pl",
-  title-pl: [Polski tytuł pracy],
+  main-lang: "en",
+  title-pl: [Polish thesis title],
   title-en: [English thesis title],
-  authors: ((name: "Jan Kowalski", album-number: "123456"),),
-  supervisor: "dr inż. Jan Nowak",
-  field-of-study: [na kierunku Informatyka],
-  diploma-block: [na bloku dyplomowania Aplikacje Internetowe],
+  authors: ((name: "John Smith", album-number: "123456"),),
+  supervisor: "dr Jan Nowak",
+  field-of-study: [in the field of Computer Science],
+  diploma-block: [in the diploma block Web applications],
   screen-mode: true,
 )
 
-= Wstęp
-Tekst pracy.
+= Introduction
+Thesis text.
 
 #pagebreak()
-#bibliography("references.bib", style: "apa.csl", title: [Bibliografia])
+#bibliography("references.bib", style: "apa.csl", title: [Bibliography])
 ```
 
 ## Polski
 
-`pollub-thesis` to szablon pracy dyplomowej w Typst dla WEII, Wydziału Elektrotechniki i Informatyki, Politechniki Lubelskiej. Zapewnia stronę tytułową WEII, dwujęzyczne strony ze streszczeniami, numerację rysunków/tabel/listingów/równań w obrębie rozdziałów oraz domyślny układ pracy zgodny z wytycznymi wydziału.
+`pollub-thesis` to szablon pracy dyplomowej w Typst dla Politechniki Lubelskiej, a dokładniej dla Wydziału Elektrotechniki i Informatyki. Zapewnia stronę tytułową WEII, dwujęzyczne strony ze streszczeniami, numerację rysunków/tabel/listingów/równań w obrębie rozdziałów oraz domyślne ustawienia układu pracy zgodne z wytycznymi wydziału.
 
 Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-preview.pdf)
 
@@ -78,8 +78,8 @@ Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-pr
 #import "@preview/pollub-thesis:0.1.0": thesis, listing
 ```
 
-- `main-lang` steruje językiem treści i lokalizowanymi etykietami
-- `screen-mode` domyślnie ma wartość `true`, aby dać symetryczne marginesy boczne do czytania na ekranie; ustaw `false` dla końcowego układu do druku i oprawy
+- `main-lang` steruje językiem głównej treści i lokalizowanymi etykietami
+- `screen-mode` domyślnie ma wartość `true`, aby dać symetryczne marginesy boczne na ekranie; ustaw `false` dla końcowego układu do druku i oprawy
 - `authors` oczekuje od 1 do 3 rekordów z polami `name` i `album-number`
 - do formatowania bibliografii używaj dołączonego pliku `apa.csl`
 - `apa.csl` to niezmodyfikowana kopia oficjalnego stylu APA CSL z `https://github.com/citation-style-language/styles/blob/master/apa.csl`
