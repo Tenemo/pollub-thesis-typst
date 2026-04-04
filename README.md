@@ -17,10 +17,9 @@ The package provides:
 ## Requirements
 
 - Typst `0.14.0` or newer
-- `Times New Roman` available on the system for the thesis body
-- `Arial` available on the system for the title page
+- `Times New Roman` available on the system
 
-The package expects the Windows fonts above and is optimized for that setup.
+The package expects the Windows font above and is optimized for that setup.
 
 ## Public API
 
@@ -41,7 +40,7 @@ Minimal example:
   authors: (
     (name: "Jan Kowalski", album-number: "123456"),
   ),
-  supervisor: "Dr inż. Jan Nowak",
+  supervisor: "dr inż. Jan Nowak",
   degree-label: ([Praca dyplomowa], [magisterska]),
   field-of-study: [na kierunku Informatyka],
   diploma-block: [na bloku dyplomowania Aplikacje Internetowe],
@@ -71,6 +70,7 @@ Set `main-lang: "en"` if the thesis body is in English. In that case, also switc
 
 - Pass `authors` as a sequence of 1 to 3 records, each with `name` and `album-number`.
 - `main-lang` controls the body language and the automatic labels used for figures, tables, listings, the table of contents, and the optional symbols list. The default is `"pl"`.
+- Set `screen-mode: true` if you want a screen-reading PDF with symmetric left and right margins. Leave it `false` for the final print-ready layout required for binding.
 - Polish single-letter word protection is enabled automatically when `main-lang: "pl"` and is still applied in the Polish abstract and official Polish title-page sections even when `main-lang: "en"`.
 - The title page uses the bundled WEII header image by default. Override it with `title-header-image` if you want to supply another asset.
 - The optional `symbols-list` parameter inserts an unnumbered symbols-list section between the table of contents and chapter 1. Its title follows `main-lang` unless you override `symbols-list-title`.
@@ -80,7 +80,7 @@ Set `main-lang: "en"` if the thesis body is in English. In that case, also switc
 
 Create a new thesis project from the template:
 
-```powershell
+```sh
 typst init @preview/pollub-thesis:0.1.0 my-thesis
 cd my-thesis
 typst watch main.typ
@@ -95,37 +95,16 @@ The generated project already contains:
 
 ## Local development
 
-For local development, install the repository under the `preview` namespace so local usage matches the future public package shape.
+For real thesis work before publication, import the local package entrypoint
+directly from your thesis repository:
 
-### Windows package directory
-
-```powershell
-New-Item -ItemType Directory -Force -Path "$env:APPDATA\typst\packages\preview\pollub-thesis"
-New-Item -ItemType Junction -Path "$env:APPDATA\typst\packages\preview\pollub-thesis\0.1.0" -Target "C:\path\to\pollub-thesis"
+```typst
+#import "../pollub-thesis-typst/lib.typ": thesis, listing
 ```
 
-Then initialize or compile with:
-
-```powershell
-typst init @preview/pollub-thesis:0.1.0 my-thesis
-typst watch main.typ
-```
-
-### Custom package root
-
-```powershell
-typst init @preview/pollub-thesis:0.1.0 my-thesis --package-path C:\path\to\typst-packages
-typst watch main.typ --package-path C:\path\to\typst-packages
-```
-
-The custom root must contain:
-
-```text
-typst-packages/
-  preview/
-    pollub-thesis/
-      0.1.0/
-```
+That is the supported local workflow for this repository. The `@preview/...`
+imports remain in `template/` only for the published package shape used by
+`typst init`.
 
 ## Package layout
 

@@ -2,36 +2,53 @@
 
 #let default-title-header-image = image(
   "../assets/weii_logo.jpg",
-  width: 155.9pt,
+  width: 7.45cm,
 )
 
-#let title-page-origin-x = 3.5cm
-#let title-page-origin-y = 2.5cm
-#let official-x-left = 90.86pt - title-page-origin-x
-#let official-logo-x = 83.9pt - title-page-origin-x
-#let official-logo-y = 58.6pt - title-page-origin-y
-#let official-footer-x = 90.98pt - title-page-origin-x
-#let official-degree-y-1 = 237.11pt - title-page-origin-y
-#let official-degree-y-2 = 281.51pt - title-page-origin-y
-#let official-study-y = 341.26pt - title-page-origin-y
-#let official-block-y = 359.26pt - title-page-origin-y
-#let official-title-pl-y = 413.06pt - title-page-origin-y
-#let official-title-en-y = 459.38pt - title-page-origin-y
-#let official-author-y = 557.81pt - title-page-origin-y
-#let official-author-slot = 54.72pt
-#let official-author-album-offset = 29.5pt
-#let official-supervisor-y = 733.73pt - title-page-origin-y
-#let official-footer-y = 797.23pt - title-page-origin-y
-#let official-title-width = 430pt
-#let minimum-title-language-gap = 12pt
-#let minimum-title-to-author-gap = 6pt
-#let minimum-author-to-supervisor-gap = 12pt
-#let minimum-footer-gap = 8pt
+#let title-page-font = "Times New Roman"
 
-#let title-block(body, lang: "pl") = box(width: official-title-width)[
-  #set text(font: "Arial", size: 15.96pt, weight: 400, lang: lang)
-  #set par(justify: false, spacing: 0pt, leading: 1.11em)
+#let title-page-left = -0.3cm
+#let title-page-width = 15.2cm
+#let title-page-logo-top = -0.45cm
+#let title-page-degree-top = 5.87cm
+#let title-page-study-top = 9.54cm
+#let title-page-titles-top = 12.07cm
+#let title-page-author-top = 17.19cm
+#let title-page-supervisor-top = 23.38cm
+#let title-page-footer-top = 25.61cm
+#let title-page-title-gap = 0.85cm
+#let title-page-title-to-author-gap = 1.7cm
+#let title-page-author-entry-gap = 0.8cm
+#let title-page-author-to-supervisor-gap = 1.1cm
+#let title-page-footer-gap = 0.8cm
+
+#let title-frame(body, lang: "pl") = box(width: title-page-width)[
+  #set text(font: title-page-font, size: 16pt, weight: 400, lang: lang)
+  #set par(
+    justify: false,
+    spacing: 0pt,
+    leading: 0.28em,
+    first-line-indent: (amount: 0pt, all: true),
+  )
   #body
+]
+
+#let authors-frame(authors) = box(width: title-page-width)[
+  #set par(
+    justify: false,
+    spacing: 0pt,
+    first-line-indent: (amount: 0pt, all: true),
+  )
+  #for (index, author) in authors.enumerate() [
+    #set text(font: title-page-font, size: 16pt, weight: 400, lang: "pl")
+    #author.at("name", default: "")
+    #linebreak()
+    #set text(font: title-page-font, size: 12pt, weight: 400, lang: "pl")
+    numer albumu #author.at("album-number", default: "")
+    #if index + 1 < authors.len() [
+      #v(title-page-author-entry-gap)
+    ]
+  ]
 ]
 
 #let title-page(
@@ -47,8 +64,12 @@
   year,
 ) = [
   #context {
-    set par(justify: false, spacing: 0pt)
-    set text(font: "Arial", size: 12pt, lang: "pl", weight: 400)
+    set par(
+      justify: false,
+      spacing: 0pt,
+      first-line-indent: (amount: 0pt, all: true),
+    )
+    set text(font: title-page-font, size: 12pt, lang: "pl", weight: 400)
 
     let author-count = calc.min(calc.max(authors.len(), 1), 3)
     let rendered-authors = if authors.len() == 0 {
@@ -56,89 +77,97 @@
     } else {
       authors.slice(0, author-count)
     }
-    let degree-line-1 = apply-polish-typography(degree-label.at(0, default: []))
-    let degree-line-2 = apply-polish-typography(degree-label.at(1, default: []))
-    let pl-title-frame = title-block(apply-polish-typography(title-pl), lang: "pl")
-    let en-title-frame = title-block(title-en, lang: "en")
-    let pl-title-height = measure(pl-title-frame).height
-    let en-title-height = measure(en-title-frame).height
-    let title-en-y = calc.max(
-      official-title-en-y,
-      official-title-pl-y + pl-title-height + minimum-title-language-gap,
-    )
-    let title-bottom-y = title-en-y + en-title-height
-    let author-block-height = (author-count - 1) * official-author-slot + official-author-album-offset
-    let supervisor-frame = box[
-      #text(font: "Arial", size: 12pt, lang: "pl", weight: 400)[#apply-polish-typography([Promotor #supervisor])]
+
+    let degree-frame = box(width: title-page-width)[
+      #set par(
+        justify: false,
+        spacing: 0pt,
+        first-line-indent: (amount: 0pt, all: true),
+      )
+      #text(font: title-page-font, size: 40pt, weight: 400, lang: "pl")[
+        #apply-polish-typography(degree-label.at(0, default: []))
+      ]
+      #v(0.4cm)
+      #text(font: title-page-font, size: 40pt, weight: 400, lang: "pl")[
+        #apply-polish-typography(degree-label.at(1, default: []))
+      ]
     ]
-    let footer-frame = box[
-      #text(font: "Arial", size: 9pt, lang: "pl", weight: 400)[#city #year]
+
+    let study-frame = box(width: title-page-width)[
+      #set text(font: title-page-font, size: 12pt, weight: 400, lang: "pl")
+      #set par(
+        justify: false,
+        spacing: 0pt,
+        leading: 0.24em,
+        first-line-indent: (amount: 0pt, all: true),
+      )
+      #apply-polish-typography(field-of-study)
+      #linebreak()
+      #apply-polish-typography(diploma-block)
     ]
-    let author-start-y = calc.min(
-      calc.max(official-author-y, title-bottom-y + minimum-title-to-author-gap),
-      official-footer-y
-        - minimum-footer-gap
-        - measure(footer-frame).height
-        - measure(supervisor-frame).height
-        - minimum-author-to-supervisor-gap
-        - author-block-height,
+
+    let titles-frame = box(width: title-page-width)[
+      #title-frame(apply-polish-typography(title-pl), lang: "pl")
+      #if title-en != none and title-en != [] [
+        #v(title-page-title-gap)
+        #title-frame(title-en, lang: "en")
+      ]
+    ]
+
+    let author-frame = authors-frame(rendered-authors)
+    let supervisor-frame = box(width: title-page-width)[
+      #set text(font: title-page-font, size: 12pt, weight: 400, lang: "pl")
+      #apply-polish-typography([Promotor #supervisor])
+    ]
+    let footer-frame = box(width: title-page-width)[
+      #set text(font: title-page-font, size: 9pt, weight: 400, lang: "pl")
+      #apply-polish-typography([#city #year])
+    ]
+
+    let title-bottom = title-page-titles-top + measure(titles-frame).height
+    let ideal-author-top = calc.max(
+      title-page-author-top,
+      title-bottom + title-page-title-to-author-gap,
     )
-    let supervisor-y = calc.max(
-      official-supervisor-y,
-      author-start-y + author-block-height + minimum-author-to-supervisor-gap,
+    let latest-supervisor-top = title-page-footer-top - title-page-footer-gap - measure(footer-frame).height - measure(supervisor-frame).height
+    let author-top = calc.min(
+      ideal-author-top,
+      latest-supervisor-top - title-page-author-to-supervisor-gap - measure(author-frame).height,
+    )
+    let supervisor-top = calc.max(
+      title-page-supervisor-top,
+      author-top + measure(author-frame).height + title-page-author-to-supervisor-gap,
     )
 
     [
       #if title-header-image != none [
-        #place(top + left, dx: official-logo-x, dy: official-logo-y)[
+        #place(top + left, dx: title-page-left, dy: title-page-logo-top)[
           #title-header-image
         ]
       ]
 
-      #place(top + left, dx: official-x-left, dy: official-degree-y-1)[
-        #set text(font: "Arial", size: 39.96pt, weight: 400, lang: "pl")
-        #degree-line-1
-      ]
-      #place(top + left, dx: official-x-left, dy: official-degree-y-2)[
-        #set text(font: "Arial", size: 39.96pt, weight: 400, lang: "pl")
-        #degree-line-2
+      #place(top + left, dx: title-page-left, dy: title-page-degree-top)[
+        #degree-frame
       ]
 
-      #place(top + left, dx: official-x-left, dy: official-study-y)[
-        #set text(font: "Arial", size: 12pt, weight: 400, lang: "pl")
-        #apply-polish-typography(field-of-study)
-      ]
-      #place(top + left, dx: official-x-left, dy: official-block-y)[
-        #set text(font: "Arial", size: 12pt, weight: 400, lang: "pl")
-        #apply-polish-typography(diploma-block)
+      #place(top + left, dx: title-page-left, dy: title-page-study-top)[
+        #study-frame
       ]
 
-      #place(top + left, dx: official-x-left, dy: official-title-pl-y)[
-        #pl-title-frame
-      ]
-      #place(top + left, dx: official-x-left, dy: title-en-y)[
-        #en-title-frame
+      #place(top + left, dx: title-page-left, dy: title-page-titles-top)[
+        #titles-frame
       ]
 
-      #for (index, author) in rendered-authors.enumerate() [
-        #let y = author-start-y + index * official-author-slot
-        #place(top + left, dx: official-x-left, dy: y)[
-          #set text(font: "Arial", size: 15.96pt, weight: 400, lang: "pl")
-          #author.at("name", default: "")
-        ]
-        #place(top + left, dx: official-x-left, dy: y + official-author-album-offset)[
-          #set text(font: "Arial", size: 12pt, weight: 400, lang: "pl")
-          numer albumu #author.at("album-number", default: "")
-        ]
+      #place(top + left, dx: title-page-left, dy: author-top)[
+        #author-frame
       ]
 
-      #place(top + left, dx: official-x-left, dy: supervisor-y)[
-        #set text(font: "Arial", size: 12pt, weight: 400, lang: "pl")
-        #apply-polish-typography([Promotor #supervisor])
+      #place(top + left, dx: title-page-left, dy: supervisor-top)[
+        #supervisor-frame
       ]
 
-      #place(top + left, dx: official-footer-x, dy: official-footer-y)[
-        #text(font: "Arial", size: 9pt, lang: "pl", weight: 400)[#city #year]
+      #place(top + left, dx: title-page-left, dy: title-page-footer-top)[
+        #footer-frame
       ]
     ]
   }

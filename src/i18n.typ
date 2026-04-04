@@ -8,11 +8,11 @@
   )
 } else {
   (
-    outline-title: [Table of Contents],
+    outline-title: [Table of contents],
     figure-supplement: [Fig.],
     table-supplement: [Table],
     listing-supplement: [Listing],
-    symbols-list-title: [List of Symbols],
+    symbols-list-title: [List of symbols],
   )
 }
 

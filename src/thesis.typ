@@ -12,6 +12,10 @@
   "(" + str(section) + "." + str(n) + ")"
 }
 
+#let body-leading = 0.7em
+#let body-par-spacing = body-leading
+#let screen-side-margin = 2.75cm
+
 #let resolve-label(labels, key, override) = if override == none {
   labels.at(key)
 } else {
@@ -36,12 +40,18 @@
     keywords-label
   }
   #set text(lang: lang)
-  #set par(justify: true, spacing: 0pt)
+  #set par(
+    justify: true,
+    spacing: body-par-spacing,
+    leading: body-leading,
+    first-line-indent: (amount: 0.85cm, all: true),
+  )
   #text(size: 14pt, weight: "bold")[#title]
-  #parbreak()
+  #v(1.4em)
   #resolved-body
   #if keywords.len() > 0 [
-    #parbreak()
+    #v(1.4em)
+    #set par(first-line-indent: (amount: 0cm, all: true))
     #strong[#resolved-keywords-label] #keywords.join(", ")
   ]
 ]
@@ -52,7 +62,7 @@
   title-pl: [Polski tytuł pracy],
   title-en: [English thesis title],
   authors: ((name: "Jan Kowalski", album-number: "000000"),),
-  supervisor: "Dr inż. Jan Nowak",
+  supervisor: "dr inż. Jan Nowak",
   degree-label: ([Praca dyplomowa], [magisterska]),
   field-of-study: [na kierunku Informatyka],
   diploma-block: [na bloku dyplomowania Aplikacje Internetowe],
@@ -74,6 +84,7 @@
   symbols-list: none,
   symbols-list-title: none,
   polish-typography: none,
+  screen-mode: false,
 ) = {
   let labels = localized-labels(main-lang)
   let resolved-outline-title = resolve-label(labels, "outline-title", outline-title)
@@ -98,17 +109,32 @@
     author: author-names,
     keywords: keywords-pl + keywords-en,
   )
-  set page(
-    paper: "a4",
-    binding: left,
-    margin: (
-      top: 2.5cm,
-      bottom: 2cm,
-      inside: 3.5cm,
-      outside: 2cm,
-    ),
-    number-align: center + bottom,
-  )
+  // `screen-mode` keeps the same text width, but switches to symmetric
+  // left/right margins so the PDF is more comfortable to read on screen.
+  if screen-mode {
+    set page(
+      paper: "a4",
+      margin: (
+        top: 2.5cm,
+        bottom: 2cm,
+        left: screen-side-margin,
+        right: screen-side-margin,
+      ),
+      number-align: center + bottom,
+    )
+  } else {
+    set page(
+      paper: "a4",
+      binding: left,
+      margin: (
+        top: 2.5cm,
+        bottom: 2cm,
+        inside: 3.5cm,
+        outside: 2cm,
+      ),
+      number-align: center + bottom,
+    )
+  }
   set text(
     font: "Times New Roman",
     size: 12pt,
@@ -116,8 +142,8 @@
   )
   set par(
     justify: true,
-    spacing: 0pt,
-    leading: 0.5em,
+    spacing: body-par-spacing,
+    leading: body-leading,
     first-line-indent: (amount: 0.85cm, all: true),
   )
   set heading(numbering: "1.1.1.")
@@ -143,18 +169,21 @@
       #counter(math.equation.where(block: true)).update(0)
     ]
     #set text(size: 14pt, weight: "bold")
+    #set par(first-line-indent: (amount: 0pt, all: true))
     #set block(above: 0pt, below: 1.2em)
     #it
   ]
 
   show heading.where(level: 2): it => [
     #set text(size: 12pt, weight: "bold")
+    #set par(first-line-indent: (amount: 0pt, all: true))
     #set block(above: 1.2em, below: 0.8em)
     #it
   ]
 
   show heading.where(level: 3): it => [
     #set text(size: 12pt, style: "italic")
+    #set par(first-line-indent: (amount: 0pt, all: true))
     #set block(above: 1em, below: 0.6em)
     #it
   ]
@@ -227,7 +256,7 @@
       "pl",
     )
 
-    #v(1.5em)
+    #pagebreak()
 
     #abstract-section(
       abstract-en-title,

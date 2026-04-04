@@ -7,8 +7,12 @@
   main-lang: "pl",
   title-pl: [Charakterystyka układu chłodzenia termoelektrycznego w funkcji prądu sterującego],
   title-en: [Characterisation of a thermoelectric cooling setup as a function of drive current],
-  authors: ((name: "inż. Jan Kowalski", album-number: "123456"),),
-  supervisor: "Dr inż. Jan Nowak",
+  authors: (
+    (name: "inż. Jan Kowalski", album-number: "123456"),
+    (name: "inż. Anna Nowak", album-number: "123457"),
+    (name: "inż. Piotr Zieliński", album-number: "123458"),
+  ),
+  supervisor: "dr inż. Jan Nowak",
   degree-label: ([Praca dyplomowa], [magisterska]),
   field-of-study: [na kierunku Informatyka],
   diploma-block: [na bloku dyplomowania Aplikacje Internetowe],
@@ -28,6 +32,9 @@
     listings, and a single APA 7 bibliography on a compact two-chapter example.
   ],
   keywords-en: ("typst", "WEII", "POLLUB", "thermoelectric cooling"),
+  // set to true for a screen-reading PDF with symmetric side margins.
+  // keep false for the final print and binding layout.
+  screen-mode: false,
 )
 
 #chapter1
