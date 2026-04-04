@@ -1,29 +1,40 @@
-#import "@preview/formal-pollub-thesis:0.1.0": thesis
+#import "@preview/pollub-thesis:0.1.0": render-bibliography, thesis
 
-#import "chapters/introduction.typ": introduction
-#import "chapters/sample-chapter.typ": sample-chapter
+#let references = yaml("references.yml")
+
+#import "chapters/chapter1.typ": chapter1
+#import "chapters/chapter2.typ": chapter2
 
 #show: thesis.with(
-  title: [Sample master's thesis],
-  author: "Jan Kowalski",
-  degree: [Master's thesis],
-  university: [Politechnika Lubelska],
-  faculty: [Faculty of Electrical Engineering and Computer Science],
-  field: [Computer Science],
-  supervisor: "dr inz. Sample Supervisor",
+  title-pl: [Charakterystyka układu chłodzenia termoelektrycznego w funkcji prądu sterującego],
+  title-en: [Characterisation of a thermoelectric cooling setup as a function of drive current],
+  author: "inż. Jan Kowalski",
+  album-number: "123456",
+  supervisor: "Dr inż. Jan Nowak",
+  degree-label: [Praca dyplomowa \ magisterska],
+  field-of-study: [na kierunku Informatyka],
+  diploma-block: [na bloku dyplomowania Aplikacje Internetowe],
   city: "Lublin",
   year: "2026",
-  abstract: [
-    This sample document demonstrates a small reusable Typst thesis package.
-    The package is intentionally minimal, but it already separates formatting
-    logic from thesis content and is structured for future publication.
+  abstract-pl: [
+    Praca przedstawia przykładowy układ pracy dyplomowej dla WEII, Wydział
+    Elektrotechniki i Informatyki, Politechnika Lubelska. Dokument pokazuje
+    stronę tytułową, dwujęzyczne streszczenia, numerację rozdziałów, rysunki,
+    tabele, listingi oraz rozdzielone bibliografie.
   ],
-  keywords: ("typst", "thesis", "pollub"),
-  language: "en",
+  keywords-pl: ("typst", "WEII", "POLLUB", "układ termoelektryczny"),
+  abstract-en: [
+    This document demonstrates a Typst thesis template for WEII, Wydział
+    Elektrotechniki i Informatyki, Politechnika Lubelska. The sample shows the
+    title page, bilingual abstracts, chapter numbering, figures, tables,
+    listings, and split bibliographies on a compact two-chapter example.
+  ],
+  keywords-en: ("typst", "WEII", "POLLUB", "thermoelectric cooling"),
 )
 
-#introduction
+#chapter1
+#chapter2
 
-#sample-chapter
-
-#bibliography("references.bib", title: [Bibliography], style: "ieee")
+#hide(bibliography("references.yml", title: none, style: "ieee"))
+#pagebreak()
+#render-bibliography(references)

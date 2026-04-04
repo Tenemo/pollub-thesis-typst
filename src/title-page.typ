@@ -1,49 +1,55 @@
 #let title-page(
-  title,
-  author,
-  degree,
   university,
+  faculty-short,
   faculty,
-  field,
+  title-pl,
+  title-en,
+  author,
+  album-number,
   supervisor,
+  degree-label,
+  field-of-study,
+  diploma-block,
   city,
   year,
 ) = [
-  #set par(justify: false)
+  #set par(justify: false, spacing: 0pt)
+  #set text(font: "Arial", size: 12pt)
 
-  #align(center)[
-    #v(2.5cm)
-    #text(size: 18pt, weight: "bold")[#university]
-    #v(0.75em)
-    #text(size: 11pt)[#faculty]
-    #v(0.5em)
-    #text(size: 11pt)[#field]
-  ]
+  #text(weight: "bold")[#university]
+  #faculty-short \
+  #faculty
 
-  #v(5cm)
+  #v(4.2cm)
 
-  #align(center)[
-    #text(size: 22pt, weight: "bold")[#title]
-    #v(1em)
-    #text(size: 14pt, weight: "semibold")[#degree]
-  ]
+  #set text(size: 32pt)
+  #degree-label
 
-  #v(4cm)
+  #v(0.7cm)
 
-  #grid(
-    columns: (1fr, 1fr),
-    gutter: 1.5cm,
-    [
-      *Author:* \
-      #author
-    ],
-    [
-      *Supervisor:* \
-      #supervisor
-    ],
-  )
+  #set text(size: 12pt)
+  #field-of-study \
+  #diploma-block
 
-  #v(5cm)
+  #v(1.2cm)
 
-  #align(center)[#city, #year]
+  #set text(size: 18pt, weight: "bold")
+  #title-pl
+
+  #v(0.4cm)
+
+  #set text(size: 16pt, weight: "regular")
+  #title-en
+
+  #v(1.8cm)
+
+  #set text(size: 12pt)
+  #author \
+  numer albumu #album-number
+
+  #v(1.5cm)
+
+  Promotor #supervisor
+
+  #place(bottom + left)[#city #year]
 ]

@@ -1,11 +1,11 @@
 [package]
-name = "formal-pollub-thesis"
+name = "pollub-thesis"
 version = "0.1.0"
 entrypoint = "lib.typ"
 authors = ["Piotr Piech"]
 license = "MIT-0"
-description = "Master's thesis at Politechnika Lubelska."
-keywords = ["Politechnika Lubelska", "POLLUB", "master's thesis", "university"]
+description = "Thesis template for WEII, Wydział Elektrotechniki i Informatyki, Politechnika Lubelska."
+keywords = ["POLLUB", "WEII", "thesis", "university"]
 categories = ["thesis"]
 compiler = "0.14.0"
 
