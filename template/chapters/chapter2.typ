@@ -1,19 +1,19 @@
 #import "@preview/pollub-thesis:0.1.0": listing
 
 #let chapter2 = [
-= Measurement setup and sample results
+= Stanowisko pomiarowe i wyniki przykładowe
 
-The sample measurement series relates the cold-side temperature of the setup to
-the drive current of the thermoelectric module. The curve shape is consistent
-with the broader trade-offs between useful cooling power, Joule heating, and
-heat leakage discussed in the thermoelectric literature @snyder-toberer-2008.
+Przykładowa seria pomiarowa wiąże temperaturę strony zimnej badanego układu z
+prądem sterującym modułem termoelektrycznym. Kształt charakterystyki jest
+zgodny z kompromisem pomiędzy mocą chłodzenia, stratami Joule'a oraz
+przenikaniem ciepła opisywanym w literaturze @snyder-toberer-2008.
 
-== Measurement points
+== Punkty pomiarowe
 
 #figure(
   table(
     columns: 3,
-    [I_TEC [A]], [T_cold [°C]], [Expanded uncertainty [°C]],
+    [I_TEC, A], [T_cold, °C], [Niepewność rozszerzona, °C],
     [1.0], [3.4], [1.5],
     [2.0], [-10.2], [1.7],
     [3.0], [-19.6], [1.9],
@@ -22,38 +22,38 @@ heat leakage discussed in the thermoelectric literature @snyder-toberer-2008.
     [5.75], [-29.0], [1.2],
     [7.0], [-25.1], [1.8],
   ),
-  supplement: [Table],
-  caption: [Measured points used to draw the sample characteristic],
+  supplement: [Tabela],
+  caption: [Punkty pomiarowe wykorzystane do wyznaczenia charakterystyki],
 )
 
-The selected points concentrate around the operating minimum so that the
-example shows both the descending part of the curve and the region where
-increasing the current no longer improves the temperature result. Practical
-setup notes for thermoelectric modules are commonly discussed together with
-thermal load and heat rejection limits @ferrotec-guide.
+Wybrane punkty skupiono w pobliżu minimum charakterystyki, tak aby przykład
+pokazywał zarówno odcinek malejący, jak i obszar, w którym dalszy wzrost prądu
+nie poprawia już wyniku temperaturowego. Zagadnienia związane z ograniczeniami
+obciążenia cieplnego i odprowadzaniem ciepła są szeroko omawiane w dokumentacji
+praktycznej modułów termoelektrycznych @ferrotec-guide.
 
-== Sample characteristic
+== Charakterystyka przykładowa
 
 #figure(
   image("../images/tcold_vs_current.png", width: 100%),
-  caption: [Cold-side temperature as a function of thermoelectric current],
+  caption: [Temperatura strony zimnej w funkcji prądu modułu termoelektrycznego],
 )
 
-The minimum visible near 5.75 A is useful as a sample discussion point because
-it illustrates a typical engineering conclusion: the best operating point is
-not necessarily at the largest admissible current. Measurement quality and
-repeatable uncertainty treatment remain essential when selecting that point
+Minimum widoczne w pobliżu 5,75 A stanowi użyteczny punkt interpretacyjny,
+ponieważ ilustruje typowy wniosek inżynierski: najlepszy punkt pracy nie musi
+odpowiadać największemu dopuszczalnemu prądowi. Przy wyborze takiego punktu
+istotne pozostają jakość pomiaru i powtarzalne traktowanie niepewności
 @nist-thermoelectric-measurements.
 
-== Control routine
+== Pętla sterowania
 
 #listing(
   "setpoint = -29.0\ncurrent = 5.75\nerror = setpoint - read_cold_side_temperature()\n\nwhile abs(error) > 0.2:\n    current = clamp(current + k_p * error, 1.0, 7.0)\n    drive_module(current)\n    error = setpoint - read_cold_side_temperature()\n",
-  caption: [Simplified control loop for setpoint tracking],
+  caption: [Uproszczona pętla regulacji dla śledzenia punktu pracy],
   lang: "python",
 )
 
-The listing is intentionally short. It exists to demonstrate caption placement,
-monospace styling, and section-based numbering for listings without forcing a
-specific software stack on the thesis author.
+Listing jest celowo krótki. Służy wyłącznie do pokazania rozmieszczenia podpisu,
+pisma maszynowego oraz numeracji w obrębie rozdziału bez narzucania autorowi
+konkretnego stosu technologicznego.
 ]

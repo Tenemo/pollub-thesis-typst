@@ -1,14 +1,16 @@
 # pollub-thesis
 
-`pollub-thesis` is a Typst thesis template for **WEII, Wydział Elektrotechniki i Informatyki, Politechnika Lubelska**.
+`pollub-thesis` is a Typst thesis template for **WEII, Wydział Elektrotechniki i Informatyki, Politechnika Lubelska**. The template is tuned for the current written faculty guidelines and the official master title page distributed as a Word document.
 
 The package provides:
 
-- a thesis layout with mirrored margins for two-sided printing
-- a title page styled for WEII
+- mirrored A4 margins for duplex printing
+- a WEII master title page with the bundled faculty header image
 - bilingual front matter with `Streszczenie` and `Abstract`
-- section-based numbering for figures, tables, and listings
-- split bibliographies for scientific and online sources
+- chapter-based numbering for figures, tables, listings, and equations
+- Polish-first defaults for headings, captions, and table of contents
+- a single APA 7 bibliography with numeric bracket citations
+- an optional `Alfabetyczny wykaz oznaczeń` front-matter block
 - a starter project compatible with `typst init`
 
 ## Requirements
@@ -25,20 +27,18 @@ The package exports:
 
 - `thesis`
 - `listing`
-- `render-bibliography`
 
 Minimal example:
 
 ```typst
-#import "@preview/pollub-thesis:0.1.0": thesis, listing, render-bibliography
-
-#let references = yaml("references.yml")
+#import "@preview/pollub-thesis:0.1.0": thesis, listing
 
 #show: thesis.with(
   title-pl: [Polski tytuł pracy],
   title-en: [English thesis title],
-  author: "Jan Kowalski",
-  album-number: "123456",
+  authors: (
+    (name: "Jan Kowalski", album-number: "123456"),
+  ),
   supervisor: "Dr inż. Jan Nowak",
   degree-label: [Praca dyplomowa \ magisterska],
   field-of-study: [na kierunku Informatyka],
@@ -51,18 +51,24 @@ Minimal example:
   keywords-en: ("typst", "weii", "pollub"),
 )
 
-= Introduction
-Text with a citation @riffat-ma-2003.
+= Wstęp
+Tekst z odwołaniem do literatury @riffat-ma-2003.
 
 #listing(
   "print('hello')",
-  caption: [Sample listing],
+  caption: [Przykładowy listing],
 )
 
-#hide(bibliography("references.yml", title: none, style: "ieee"))
 #pagebreak()
-#render-bibliography(references)
+#bibliography("references.bib", style: "apa", title: [Bibliografia])
 ```
+
+## Notes
+
+- Pass `authors` as a sequence of 1 to 3 records, each with `name` and `album-number`.
+- The title page uses the bundled WEII header image by default. Override it with `title-header-image` if you want to supply another asset.
+- The optional `symbols-list` parameter inserts an unnumbered `Alfabetyczny wykaz oznaczeń` section between the table of contents and chapter 1.
+- The template intentionally does not generate separate lists of tables, figures, or formulas, because the WEII guidelines forbid them.
 
 ## Getting started
 
@@ -78,13 +84,12 @@ The generated project already contains:
 
 - a WEII title page setup
 - two sample chapters
-- a sample figure, table, and listing
-- one `references.yml` file rendered as split scientific and online references
+- a sample figure, table, listing, and equation
+- one `references.bib` file rendered as a single APA 7 bibliography
 
 ## Local development
 
-For local development, install the repository under the `preview` namespace so
-local usage matches the future public package shape.
+For local development, install the repository under the `preview` namespace so local usage matches the future public package shape.
 
 ### Windows package directory
 
@@ -120,13 +125,13 @@ typst-packages/
 
 - `typst.toml`: package and template manifest
 - `lib.typ`: public entrypoint
-- `src/`: implementation files for the layout, title page, listings, and bibliography rendering
+- `assets/`: bundled title-page image assets
+- `src/`: implementation files for the layout, title page, and listings
 - `template/`: starter thesis project copied by `typst init`
 
 ## Publishing
 
-If package name review requires a rename, update the manifest and starter
-import together before release.
+If package name review requires a rename, update the manifest and starter import together before release.
 
 ## License
 

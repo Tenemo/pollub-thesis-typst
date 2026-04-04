@@ -1,11 +1,24 @@
+#let default-title-header-image = image(
+  "../assets/weii-title-header.jpg",
+  width: 7cm,
+)
+
+#let author-block(author) = [
+  #set text(size: 16pt, weight: "regular")
+  #author.at("name", default: "")
+  #v(0.25cm)
+  #set text(size: 12pt)
+  numer albumu #author.at("album-number", default: "")
+]
+
 #let title-page(
+  title-header-image,
   university,
   faculty-short,
   faculty,
   title-pl,
   title-en,
-  author,
-  album-number,
+  authors,
   supervisor,
   degree-label,
   field-of-study,
@@ -14,42 +27,70 @@
   year,
 ) = [
   #set par(justify: false, spacing: 0pt)
-  #set text(font: "Arial", size: 12pt)
+  #set text(font: "Arial", size: 12pt, lang: "pl")
 
-  #text(weight: "bold")[#university]
-  #faculty-short \
-  #faculty
+  #let author-count = calc.min(calc.max(authors.len(), 1), 3)
+  #let rendered-authors = if authors.len() == 0 {
+    ((name: "", album-number: ""),)
+  } else {
+    authors.slice(0, author-count)
+  }
+  #let leading-gap = if author-count == 1 {
+    2.35cm
+  } else if author-count == 2 {
+    1.45cm
+  } else {
+    0.75cm
+  }
+  #let between-authors = if author-count == 3 { 0.6cm } else { 0.95cm }
 
-  #v(4.2cm)
+  #pad(left: -0.3cm)[
+    #if title-header-image != none [
+      #move(dx: -0.25cm)[#title-header-image]
+    ] else [
+      #text(weight: "bold")[#university]
+      #faculty-short \
+      #faculty
+    ]
 
-  #set text(size: 32pt)
-  #degree-label
+    #v(4.05cm)
 
-  #v(0.7cm)
+    #set text(size: 40pt, weight: "regular")
+    #set par(leading: -0.04em, spacing: 0pt)
+    #degree-label
 
-  #set text(size: 12pt)
-  #field-of-study \
-  #diploma-block
+    #v(0.45cm)
 
-  #v(1.2cm)
+    #set text(size: 12pt)
+    #set par(leading: 0.15em, spacing: 0pt)
+    #field-of-study \
+    #diploma-block
 
-  #set text(size: 18pt, weight: "bold")
-  #title-pl
+    #v(1.15cm)
 
-  #v(0.4cm)
+    #set text(size: 16pt, weight: "regular")
+    #title-pl
 
-  #set text(size: 16pt, weight: "regular")
-  #title-en
+    #v(0.65cm)
 
-  #v(1.8cm)
+    #title-en
 
-  #set text(size: 12pt)
-  #author \
-  numer albumu #album-number
+    #v(leading-gap)
 
-  #v(1.5cm)
+    #for (index, author) in rendered-authors.enumerate() [
+      #author-block(author)
+      #if index + 1 < author-count [
+        #v(between-authors)
+      ]
+    ]
 
-  Promotor #supervisor
+    #v(0.85cm)
 
-  #place(bottom + left)[#city #year]
+    #set text(size: 12pt)
+    Promotor #supervisor
+  ]
+
+  #place(bottom + left, dx: -0.3cm)[
+    #text(font: "Arial", size: 9pt, lang: "pl")[#city #year]
+  ]
 ]
