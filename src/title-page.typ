@@ -21,13 +21,15 @@
 #let title-page-author-entry-gap = 0.8cm
 #let title-page-author-to-supervisor-gap = 1.1cm
 #let title-page-footer-gap = 0.8cm
+#let title-page-title-leading = 0.5em
+#let title-page-study-leading = 0.42em
 
 #let title-frame(body, lang: "pl") = box(width: title-page-width)[
   #set text(font: title-page-font, size: 16pt, weight: 400, lang: lang)
   #set par(
     justify: false,
     spacing: 0pt,
-    leading: 0.28em,
+    leading: title-page-title-leading,
     first-line-indent: (amount: 0pt, all: true),
   )
   #body
@@ -98,7 +100,7 @@
       #set par(
         justify: false,
         spacing: 0pt,
-        leading: 0.24em,
+        leading: title-page-study-leading,
         first-line-indent: (amount: 0pt, all: true),
       )
       #apply-polish-typography(field-of-study)

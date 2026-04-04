@@ -1,12 +1,12 @@
-# pollub-thesis
+# Pollub thesis
 
-jump to: [english](#english) | [polski](#polski)
+Your thesis is in Polish? Jump to: [polski](#polski)
 
-## english
+## English
 
-`pollub-thesis` is a Typst thesis template for WEII, Wydział Elektrotechniki i Informatyki, Politechnika Lubelska. It provides a WEII title page, bilingual abstract pages, chapter-based numbering for figures/tables/listings/equations, and thesis layout defaults aligned with the faculty guidelines.
+`pollub-thesis` is a Typst thesis template for the Lublin University of Technology, specifically Wydział Elektrotechniki i Informatyki. It provides a WEII title page, bilingual abstract pages, chapter-based numbering for figures/tables/listings/equations, and thesis layout defaults aligned with the faculty guidelines.
 
-### usage notes
+### Usage notes
 
 - exports `thesis` and `listing`
 - requires Typst `0.14.0+` and `Times New Roman`
@@ -25,11 +25,13 @@ jump to: [english](#english) | [polski](#polski)
 - `main-lang` controls the body language and localized labels
 - `screen-mode` defaults to `true` for symmetric side margins on screen; set it to `false` for the final print and binding layout
 - `authors` expects 1 to 3 records with `name` and `album-number`
+- use the bundled `apa.csl` for bibliography formatting
+- `apa.csl` is an unmodified copy of the official APA CSL from `https://github.com/citation-style-language/styles/blob/master/apa.csl`
 - `symbols-list` is optional and is inserted between the table of contents and chapter 1
 - separate lists of figures, tables, and formulas are intentionally omitted
 - add the bibliography explicitly at the end of the document
 
-### minimal example
+### Minimal example
 
 ```typst
 #import "../pollub-thesis-typst/lib.typ": thesis, listing
@@ -49,14 +51,14 @@ jump to: [english](#english) | [polski](#polski)
 Tekst pracy.
 
 #pagebreak()
-#bibliography("references.bib", style: "apa", title: [Bibliografia])
+#bibliography("references.bib", style: "apa.csl", title: [Bibliografia])
 ```
 
-## polski
+## Polski
 
 `pollub-thesis` to szablon pracy dyplomowej w Typst dla WEII, Wydziału Elektrotechniki i Informatyki, Politechniki Lubelskiej. Zapewnia stronę tytułową WEII, dwujęzyczne strony ze streszczeniami, numerację rysunków/tabel/listingów/równań w obrębie rozdziałów oraz domyślny układ pracy zgodny z wytycznymi wydziału.
 
-### uwagi dotyczące użycia
+### Uwagi dotyczące użycia
 
 - eksportuje `thesis` i `listing`
 - wymaga Typst `0.14.0+` oraz `Times New Roman`
@@ -75,11 +77,13 @@ Tekst pracy.
 - `main-lang` steruje językiem treści i lokalizowanymi etykietami
 - `screen-mode` domyślnie ma wartość `true`, aby dać symetryczne marginesy boczne do czytania na ekranie; ustaw `false` dla końcowego układu do druku i oprawy
 - `authors` oczekuje od 1 do 3 rekordów z polami `name` i `album-number`
+- do formatowania bibliografii używaj dołączonego pliku `apa.csl`
+- `apa.csl` to niezmodyfikowana kopia oficjalnego stylu APA CSL z `https://github.com/citation-style-language/styles/blob/master/apa.csl`
 - `symbols-list` jest opcjonalny i trafia między spis treści a rozdział 1
 - osobne spisy rysunków, tabel i wzorów są celowo pominięte
 - bibliografię dodaj jawnie na końcu dokumentu
 
-### minimalny przykład
+### Minimalny przykład
 
 ```typst
 #import "../pollub-thesis-typst/lib.typ": thesis, listing
@@ -99,5 +103,5 @@ Tekst pracy.
 Tekst pracy.
 
 #pagebreak()
-#bibliography("references.bib", style: "apa", title: [Bibliografia])
+#bibliography("references.bib", style: "apa.csl", title: [Bibliografia])
 ```

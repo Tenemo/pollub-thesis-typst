@@ -41,4 +41,4 @@
 #chapter2
 
 #pagebreak()
-#bibliography("references.bib", style: "apa", title: [Bibliografia])
+#bibliography("references.bib", style: "apa.csl", title: [Bibliografia])

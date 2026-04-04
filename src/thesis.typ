@@ -15,6 +15,8 @@
 #let body-leading = 0.7em
 #let body-par-spacing = body-leading
 #let screen-side-margin = 2.75cm
+#let object-block-spacing = 18pt
+#let caption-block-spacing = 6pt
 
 #let resolve-label(labels, key, override) = if override == none {
   labels.at(key)
@@ -46,9 +48,7 @@
     leading: body-leading,
     first-line-indent: (amount: 0.85cm, all: true),
   )
-  #set par(first-line-indent: (amount: 0cm, all: true))
-  #text(size: 14pt, weight: "bold")[#title]
-  #v(1.4em)
+  #heading(level: 1, numbering: none, outlined: true)[#title]
   #set par(
     justify: true,
     spacing: body-par-spacing,
@@ -154,7 +154,6 @@
     first-line-indent: (amount: 0.85cm, all: true),
   )
   set heading(numbering: "1.1.1.")
-  set cite(style: "ieee")
   set figure(numbering: sectioned-numbering)
   set math.equation(numbering: equation-numbering)
   set table(
@@ -196,9 +195,15 @@
   ]
 
   show outline.entry.where(level: 1): set text(weight: "bold")
-  show figure.caption: it => align(center)[
-    #set text(size: 10pt, lang: main-lang)
-    #it
+  show figure.caption: it => block(
+    width: 100%,
+    above: caption-block-spacing,
+    below: caption-block-spacing,
+  )[
+    #align(center)[
+      #set text(size: 10pt, lang: main-lang)
+      #it
+    ]
   ]
   show figure.where(kind: image): set figure(
     supplement: resolved-figure-supplement,
@@ -206,7 +211,11 @@
   show figure.where(kind: image): set figure.caption(
     separator: [. ],
   )
-  show figure.where(kind: image): it => block(width: 100%, above: 6pt, below: 6pt)[
+  show figure.where(kind: image): it => block(
+    width: 100%,
+    above: object-block-spacing,
+    below: object-block-spacing,
+  )[
     #align(center)[#it]
   ]
   show figure.where(kind: table): set figure(
@@ -216,7 +225,11 @@
     position: top,
     separator: [. ],
   )
-  show figure.where(kind: table): it => block(width: 100%, above: 6pt, below: 6pt)[
+  show figure.where(kind: table): it => block(
+    width: 100%,
+    above: object-block-spacing,
+    below: object-block-spacing,
+  )[
     #align(center)[#it]
   ]
   show figure.where(kind: "listing"): set figure(
@@ -228,8 +241,8 @@
   )
   show figure.where(kind: "listing"): set block(
     width: 100%,
-    above: 6pt,
-    below: 6pt,
+    above: object-block-spacing,
+    below: object-block-spacing,
   )
   show table: set text(size: 11pt)
   show raw.where(block: true): set text(size: 10pt)

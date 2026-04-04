@@ -14,5 +14,5 @@ dobór właściwego zakresu badań, układu rozdziałów i narracji naukowej.
 
 Drugi rozdział zawiera przykładowy wykres, tabelę i listing, aby pokazać układ
 elementów, numerację w obrębie rozdziału oraz bibliografię renderowaną jako
-jedna lista zgodna z APA 7 przy zachowaniu numerycznych odwołań w tekście.
+jedna lista zgodna z APA 7.
 ]
