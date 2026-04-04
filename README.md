@@ -6,6 +6,8 @@ Your thesis is in Polish? Jump to: [polski](#polski)
 
 `pollub-thesis` is a Typst thesis template for the Lublin University of Technology, specifically Wydział Elektrotechniki i Informatyki. It provides a WEII title page, bilingual abstract pages, chapter-based numbering for figures/tables/listings/equations, and thesis layout defaults aligned with the faculty guidelines.
 
+Current rendered preview: [template-preview.pdf](./template-preview.pdf)
+
 ### Usage notes
 
 - exports `thesis` and `listing`
@@ -57,6 +59,8 @@ Tekst pracy.
 ## Polski
 
 `pollub-thesis` to szablon pracy dyplomowej w Typst dla WEII, Wydziału Elektrotechniki i Informatyki, Politechniki Lubelskiej. Zapewnia stronę tytułową WEII, dwujęzyczne strony ze streszczeniami, numerację rysunków/tabel/listingów/równań w obrębie rozdziałów oraz domyślny układ pracy zgodny z wytycznymi wydziału.
+
+Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-preview.pdf)
 
 ### Uwagi dotyczące użycia
 

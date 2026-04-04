@@ -17,12 +17,36 @@
 #let screen-side-margin = 2.75cm
 #let object-block-spacing = 18pt
 #let caption-block-spacing = 6pt
+#let table-header-fill = luma(232)
+#let table-row-fill = luma(245)
+#let listing-block-fill = luma(246)
+#let listing-block-radius = 3pt
+#let listing-block-inset = 8pt
+#let listing-font-size = 9pt
 
 #let resolve-label(labels, key, override) = if override == none {
   labels.at(key)
 } else {
   override
 }
+
+#let centered-object-block(it) = block(
+  width: 100%,
+  above: object-block-spacing,
+  below: object-block-spacing,
+  breakable: false,
+)[
+  #align(center)[#it]
+]
+
+#let full-width-object-block(it) = block(
+  width: 100%,
+  above: object-block-spacing,
+  below: object-block-spacing,
+  breakable: false,
+)[
+  #it
+]
 
 #let abstract-section(
   title,
@@ -158,8 +182,15 @@
   set math.equation(numbering: equation-numbering)
   set table(
     stroke: 0.5pt,
-    inset: (x: 5pt, y: 4pt),
+    inset: (x: 6pt, y: 4pt),
     align: left,
+    fill: (x, y) => if y == 0 {
+      table-header-fill
+    } else if y > 0 and calc.rem(y, 2) == 0 {
+      table-row-fill
+    } else {
+      none
+    },
   )
 
   show heading.where(level: 1): it => [
@@ -211,13 +242,7 @@
   show figure.where(kind: image): set figure.caption(
     separator: [. ],
   )
-  show figure.where(kind: image): it => block(
-    width: 100%,
-    above: object-block-spacing,
-    below: object-block-spacing,
-  )[
-    #align(center)[#it]
-  ]
+  show figure.where(kind: image): it => centered-object-block(it)
   show figure.where(kind: table): set figure(
     supplement: resolved-table-supplement,
   )
@@ -225,13 +250,7 @@
     position: top,
     separator: [. ],
   )
-  show figure.where(kind: table): it => block(
-    width: 100%,
-    above: object-block-spacing,
-    below: object-block-spacing,
-  )[
-    #align(center)[#it]
-  ]
+  show figure.where(kind: table): it => centered-object-block(it)
   show figure.where(kind: "listing"): set figure(
     supplement: resolved-listing-supplement,
   )
@@ -239,13 +258,23 @@
     position: top,
     separator: [. ],
   )
-  show figure.where(kind: "listing"): set block(
-    width: 100%,
-    above: object-block-spacing,
-    below: object-block-spacing,
-  )
+  show figure.where(kind: "listing"): it => full-width-object-block(it)
   show table: set text(size: 11pt)
-  show raw.where(block: true): set text(size: 10pt)
+  show table.cell: it => {
+    set text(size: 10.5pt, hyphenate: false)
+    set par(justify: false, first-line-indent: (amount: 0pt, all: true))
+    it
+  }
+  show raw.where(block: true): it => block(
+    fill: listing-block-fill,
+    inset: listing-block-inset,
+    radius: listing-block-radius,
+    width: 100%,
+  )[
+    #set text(size: listing-font-size)
+    #set par(justify: false, first-line-indent: (amount: 0pt, all: true))
+    #it
+  ]
   show table.cell.where(y: 0): strong
   show math.equation.where(block: true): set block(above: 6pt, below: 6pt)
 
