@@ -13,7 +13,11 @@ przenikaniem ciepła opisywanym w literaturze @snyder-toberer-2008.
 #figure(
   table(
     columns: 3,
-    [I_TEC, A], [T_cold, °C], [Niepewność rozszerzona, °C],
+    table.header(
+      [I_TEC, A],
+      [T_cold, °C],
+      [Niepewność rozszerzona, °C],
+    ),
     [1.0], [3.4], [1.5],
     [2.0], [-10.2], [1.7],
     [3.0], [-19.6], [1.9],
@@ -22,7 +26,6 @@ przenikaniem ciepła opisywanym w literaturze @snyder-toberer-2008.
     [5.75], [-29.0], [1.2],
     [7.0], [-25.1], [1.8],
   ),
-  supplement: [Tabela],
   caption: [Punkty pomiarowe wykorzystane do wyznaczenia charakterystyki],
 )
 

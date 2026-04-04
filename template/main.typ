@@ -4,6 +4,7 @@
 #import "chapters/chapter2.typ": chapter2
 
 #show: thesis.with(
+  main-lang: "pl",
   title-pl: [Charakterystyka układu chłodzenia termoelektrycznego w funkcji prądu sterującego],
   title-en: [Characterisation of a thermoelectric cooling setup as a function of drive current],
   authors: ((name: "inż. Jan Kowalski", album-number: "123456"),),

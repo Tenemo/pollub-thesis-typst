@@ -1,33 +1,22 @@
+#import "i18n.typ": apply-polish-typography, localized-labels
 #import "title-page.typ": default-title-header-image, title-page
 
+#let current-chapter() = counter(heading.where(level: 1)).get().at(0, default: 0)
+
 #let sectioned-numbering(n) = context {
-  let section = counter(heading.where(level: 1)).get().at(0, default: 0)
-  numbering("1.1", section, n)
+  numbering("1.1", current-chapter(), n)
 }
 
 #let equation-numbering(n) = context {
-  let section = counter(heading.where(level: 1)).get().at(0, default: 0)
+  let section = current-chapter()
   "(" + str(section) + "." + str(n) + ")"
 }
 
-#let polish-letters = "A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż"
-
-#let protect-internal-single-letter-word(it) = {
-  let chars = it.text.clusters()
-  [#chars.at(0)#chars.at(1)#sym.space.nobreak#chars.at(3)]
+#let resolve-label(labels, key, override) = if override == none {
+  labels.at(key)
+} else {
+  override
 }
-
-#let protect-leading-single-letter-word(it) = {
-  let chars = it.text.clusters()
-  [#chars.at(0)#sym.space.nobreak#chars.at(2)]
-}
-
-#let caption-block(caption, supplement) = [
-  #align(center)[
-    #set text(size: 10pt, lang: "pl")
-    #supplement #h(0.35em)#context caption.counter.display(caption.numbering). #caption.body
-  ]
-]
 
 #let abstract-section(
   title,
@@ -36,19 +25,30 @@
   keywords-label,
   lang,
 ) = [
+  #let resolved-body = if lang == "pl" {
+    apply-polish-typography(body)
+  } else {
+    body
+  }
+  #let resolved-keywords-label = if lang == "pl" {
+    apply-polish-typography(keywords-label)
+  } else {
+    keywords-label
+  }
   #set text(lang: lang)
   #set par(justify: true, spacing: 0pt)
   #text(size: 14pt, weight: "bold")[#title]
   #parbreak()
-  #body
+  #resolved-body
   #if keywords.len() > 0 [
     #parbreak()
-    #strong[#keywords-label] #keywords.join(", ")
+    #strong[#resolved-keywords-label] #keywords.join(", ")
   ]
 ]
 
 #let thesis(
   body,
+  main-lang: "pl",
   title-pl: [Polski tytuł pracy],
   title-en: [English thesis title],
   authors: ((name: "Jan Kowalski", album-number: "000000"),),
@@ -62,27 +62,42 @@
   keywords-pl: (),
   abstract-en: [A short English abstract.],
   keywords-en: (),
-  university: [Politechnika Lubelska],
-  faculty-short: [WEII],
-  faculty: [Wydział Elektrotechniki i Informatyki],
   title-header-image: default-title-header-image,
-  title-note: none,
-  outline-title: [Spis treści],
+  outline-title: none,
   abstract-pl-title: [Streszczenie],
   abstract-en-title: [Abstract],
   keywords-pl-label: [Słowa kluczowe:],
   keywords-en-label: [Keywords:],
+  figure-supplement: none,
+  table-supplement: none,
+  listing-supplement: none,
   symbols-list: none,
+  symbols-list-title: none,
+  polish-typography: none,
 ) = {
+  let labels = localized-labels(main-lang)
+  let resolved-outline-title = resolve-label(labels, "outline-title", outline-title)
+  let resolved-figure-supplement = resolve-label(labels, "figure-supplement", figure-supplement)
+  let resolved-table-supplement = resolve-label(labels, "table-supplement", table-supplement)
+  let resolved-listing-supplement = resolve-label(labels, "listing-supplement", listing-supplement)
+  let resolved-symbols-list-title = resolve-label(labels, "symbols-list-title", symbols-list-title)
+  let enable-polish-typography = if polish-typography == none {
+    main-lang == "pl"
+  } else {
+    polish-typography
+  }
   let author-names = authors.map(author => author.at("name", default: "")).join(", ")
+  let main-body = if enable-polish-typography {
+    apply-polish-typography(body)
+  } else {
+    body
+  }
 
   set document(
     title: title-pl,
     author: author-names,
     keywords: keywords-pl + keywords-en,
   )
-  show regex("(?i) [aiouwz] [" + polish-letters + "]"): protect-internal-single-letter-word
-  show regex("(?i)[aiouwz] [" + polish-letters + "]"): protect-leading-single-letter-word
   set page(
     paper: "a4",
     binding: left,
@@ -97,7 +112,7 @@
   set text(
     font: "Times New Roman",
     size: 12pt,
-    lang: "pl",
+    lang: main-lang,
   )
   set par(
     justify: true,
@@ -116,7 +131,7 @@
   )
 
   show heading.where(level: 1): it => [
-    #let section-number = counter(heading.where(level: 1)).get().at(0, default: 0)
+    #let section-number = current-chapter()
     #let numbered-heading = it.numbering != none
     #if numbered-heading and section-number > 1 [
       #pagebreak()
@@ -145,34 +160,43 @@
   ]
 
   show outline.entry.where(level: 1): set text(weight: "bold")
-  show figure.where(kind: image): it => block(width: 100%, above: 6pt, below: 6pt)[
-    #align(center)[#it.body]
-    #if it.caption != none [
-      #v(6pt)
-      #caption-block(it.caption, [Rys.])
-    ]
-  ]
-  show figure.where(kind: table): it => block(width: 100%, above: 6pt, below: 6pt)[
-    #if it.caption != none [
-      #caption-block(it.caption, [Tabela])
-      #v(6pt)
-    ]
-    #align(center)[
-      #set text(size: 11pt)
-      #it.body
-    ]
-  ]
-  show figure.where(kind: "listing"): it => block(width: 100%, above: 6pt, below: 6pt)[
-    #if it.caption != none [
-      #caption-block(it.caption, [Listing])
-      #v(6pt)
-    ]
-    #it.body
-  ]
-  show raw.where(block: true): it => block(width: 100%)[
-    #set text(size: 10pt)
+  show figure.caption: it => align(center)[
+    #set text(size: 10pt, lang: main-lang)
     #it
   ]
+  show figure.where(kind: image): set figure(
+    supplement: resolved-figure-supplement,
+  )
+  show figure.where(kind: image): set figure.caption(
+    separator: [. ],
+  )
+  show figure.where(kind: image): it => block(width: 100%, above: 6pt, below: 6pt)[
+    #align(center)[#it]
+  ]
+  show figure.where(kind: table): set figure(
+    supplement: resolved-table-supplement,
+  )
+  show figure.where(kind: table): set figure.caption(
+    position: top,
+    separator: [. ],
+  )
+  show figure.where(kind: table): it => block(width: 100%, above: 6pt, below: 6pt)[
+    #align(center)[#it]
+  ]
+  show figure.where(kind: "listing"): set figure(
+    supplement: resolved-listing-supplement,
+  )
+  show figure.where(kind: "listing"): set figure.caption(
+    position: top,
+    separator: [. ],
+  )
+  show figure.where(kind: "listing"): set block(
+    width: 100%,
+    above: 6pt,
+    below: 6pt,
+  )
+  show table: set text(size: 11pt)
+  show raw.where(block: true): set text(size: 10pt)
   show table.cell.where(y: 0): strong
   show math.equation.where(block: true): set block(above: 6pt, below: 6pt)
 
@@ -180,10 +204,6 @@
     #set page(numbering: none)
     #title-page(
       title-header-image,
-      title-note,
-      university,
-      faculty-short,
-      faculty,
       title-pl,
       title-en,
       authors,
@@ -219,16 +239,16 @@
 
     #pagebreak()
 
-    #outline(title: outline-title, depth: 2)
+    #outline(title: resolved-outline-title, depth: 2)
 
     #pagebreak()
     #if symbols-list != none [
       #set par(first-line-indent: (amount: 0cm, all: true))
-      #text(size: 14pt, weight: "bold")[Alfabetyczny wykaz oznaczeń]
+      #text(size: 14pt, weight: "bold")[#resolved-symbols-list-title]
       #parbreak()
       #symbols-list
       #pagebreak()
     ]
-    #body
+    #main-body
   ]
 }

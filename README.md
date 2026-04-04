@@ -8,9 +8,10 @@ The package provides:
 - a WEII master title page with the bundled faculty header image
 - bilingual front matter with `Streszczenie` and `Abstract`
 - chapter-based numbering for figures, tables, listings, and equations
-- Polish-first defaults for headings, captions, and table of contents
+- language-aware defaults for headings, captions, and table of contents
+- Polish typography helpers that stay scoped to Polish content
 - a single APA 7 bibliography with numeric bracket citations
-- an optional `Alfabetyczny wykaz oznaczeń` front-matter block
+- an optional localized symbols-list front-matter block
 - a starter project compatible with `typst init`
 
 ## Requirements
@@ -34,6 +35,7 @@ Minimal example:
 #import "@preview/pollub-thesis:0.1.0": thesis, listing
 
 #show: thesis.with(
+  main-lang: "pl",
   title-pl: [Polski tytuł pracy],
   title-en: [English thesis title],
   authors: (
@@ -63,11 +65,15 @@ Tekst z odwołaniem do literatury @riffat-ma-2003.
 #bibliography("references.bib", style: "apa", title: [Bibliografia])
 ```
 
+Set `main-lang: "en"` if the thesis body is in English. In that case, also switch the bibliography title to `[Bibliography]`.
+
 ## Notes
 
 - Pass `authors` as a sequence of 1 to 3 records, each with `name` and `album-number`.
+- `main-lang` controls the body language and the automatic labels used for figures, tables, listings, the table of contents, and the optional symbols list. The default is `"pl"`.
+- Polish single-letter word protection is enabled automatically when `main-lang: "pl"` and is still applied in the Polish abstract and official Polish title-page sections even when `main-lang: "en"`.
 - The title page uses the bundled WEII header image by default. Override it with `title-header-image` if you want to supply another asset.
-- The optional `symbols-list` parameter inserts an unnumbered `Alfabetyczny wykaz oznaczeń` section between the table of contents and chapter 1.
+- The optional `symbols-list` parameter inserts an unnumbered symbols-list section between the table of contents and chapter 1. Its title follows `main-lang` unless you override `symbols-list-title`.
 - The template intentionally does not generate separate lists of tables, figures, or formulas, because the WEII guidelines forbid them.
 
 ## Getting started

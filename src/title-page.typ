@@ -1,3 +1,5 @@
+#import "i18n.typ": apply-polish-typography
+
 #let default-title-header-image = image(
   "../assets/weii_logo.jpg",
   width: 155.9pt,
@@ -5,10 +7,6 @@
 
 #let title-page-origin-x = 3.5cm
 #let title-page-origin-y = 2.5cm
-#let official-note-line-1-x = 254.93pt - title-page-origin-x
-#let official-note-line-1-y = 36.34pt - title-page-origin-y
-#let official-note-line-2-x = 281.11pt - title-page-origin-x
-#let official-note-line-2-y = 47.86pt - title-page-origin-y
 #let official-x-left = 90.86pt - title-page-origin-x
 #let official-logo-x = 83.9pt - title-page-origin-x
 #let official-logo-y = 58.6pt - title-page-origin-y
@@ -38,10 +36,6 @@
 
 #let title-page(
   title-header-image,
-  title-note,
-  university,
-  faculty-short,
-  faculty,
   title-pl,
   title-en,
   authors,
@@ -62,17 +56,9 @@
     } else {
       authors.slice(0, author-count)
     }
-    let degree-line-1 = if type(degree-label) == array {
-      degree-label.at(0, default: [])
-    } else {
-      [Praca dyplomowa]
-    }
-    let degree-line-2 = if type(degree-label) == array {
-      degree-label.at(1, default: [])
-    } else {
-      degree-label
-    }
-    let pl-title-frame = title-block(title-pl, lang: "pl")
+    let degree-line-1 = apply-polish-typography(degree-label.at(0, default: []))
+    let degree-line-2 = apply-polish-typography(degree-label.at(1, default: []))
+    let pl-title-frame = title-block(apply-polish-typography(title-pl), lang: "pl")
     let en-title-frame = title-block(title-en, lang: "en")
     let pl-title-height = measure(pl-title-frame).height
     let en-title-height = measure(en-title-frame).height
@@ -83,7 +69,7 @@
     let title-bottom-y = title-en-y + en-title-height
     let author-block-height = (author-count - 1) * official-author-slot + official-author-album-offset
     let supervisor-frame = box[
-      #text(font: "Arial", size: 12pt, lang: "pl", weight: 400)[Promotor #supervisor]
+      #text(font: "Arial", size: 12pt, lang: "pl", weight: 400)[#apply-polish-typography([Promotor #supervisor])]
     ]
     let footer-frame = box[
       #text(font: "Arial", size: 9pt, lang: "pl", weight: 400)[#city #year]
@@ -107,33 +93,6 @@
         #place(top + left, dx: official-logo-x, dy: official-logo-y)[
           #title-header-image
         ]
-      ] else [
-        #place(top + left, dx: official-logo-x, dy: official-logo-y)[
-          #set text(size: 12pt, weight: 700)
-          #align(left)[
-            #university \
-            #faculty-short \
-            #faculty
-          ]
-        ]
-      ]
-
-      #if title-note != none [
-        #let note-lines = if type(title-note) == array {
-          title-note
-        } else {
-          (title-note,)
-        }
-        #place(top + left, dx: official-note-line-1-x, dy: official-note-line-1-y)[
-          #set text(font: "Arial", size: 9.96pt, lang: "pl", weight: 400)
-          #note-lines.at(0, default: [])
-        ]
-        #if note-lines.len() > 1 [
-          #place(top + left, dx: official-note-line-2-x, dy: official-note-line-2-y)[
-            #set text(font: "Arial", size: 9.96pt, lang: "pl", weight: 400)
-            #note-lines.at(1, default: [])
-          ]
-        ]
       ]
 
       #place(top + left, dx: official-x-left, dy: official-degree-y-1)[
@@ -147,11 +106,11 @@
 
       #place(top + left, dx: official-x-left, dy: official-study-y)[
         #set text(font: "Arial", size: 12pt, weight: 400, lang: "pl")
-        #field-of-study
+        #apply-polish-typography(field-of-study)
       ]
       #place(top + left, dx: official-x-left, dy: official-block-y)[
         #set text(font: "Arial", size: 12pt, weight: 400, lang: "pl")
-        #diploma-block
+        #apply-polish-typography(diploma-block)
       ]
 
       #place(top + left, dx: official-x-left, dy: official-title-pl-y)[
@@ -175,7 +134,7 @@
 
       #place(top + left, dx: official-x-left, dy: supervisor-y)[
         #set text(font: "Arial", size: 12pt, weight: 400, lang: "pl")
-        Promotor #supervisor
+        #apply-polish-typography([Promotor #supervisor])
       ]
 
       #place(top + left, dx: official-footer-x, dy: official-footer-y)[
