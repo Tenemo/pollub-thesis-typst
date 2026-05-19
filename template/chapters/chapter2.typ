@@ -1,6 +1,6 @@
-#import "@preview/pollub-thesis:0.1.0": listing
+#let local-template-preview = sys.inputs.at("local-template-preview", default: "false") == "true"
 
-#let chapter2 = [
+#let chapter2-with-listing(listing) = [
 = Stanowisko pomiarowe i wyniki przykładowe
 
 Przykładowa seria pomiarowa wiąże temperaturę strony zimnej badanego układu z
@@ -76,3 +76,11 @@ konkretnego stosu technologicznego. Współczynnik proporcjonalny `k_p`#footnote
   go zastąpić regulatorem PI, histerezą albo algorytmem wyszukiwania optimum.
 ] pełni tu jedynie rolę poglądową.
 ]
+
+#let chapter2 = if local-template-preview {
+  import "../../lib.typ": listing
+  chapter2-with-listing(listing)
+} else {
+  import "@preview/pollub-thesis:0.1.0": listing
+  chapter2-with-listing(listing)
+}

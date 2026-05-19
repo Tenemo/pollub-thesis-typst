@@ -1,0 +1,7 @@
+{
+  "tinymist.rootPath": "${workspaceFolder}",
+  "tinymist.typstExtraArgs": [
+    "--input",
+    "local-template-preview=true"
+  ]
+}

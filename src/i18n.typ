@@ -1,18 +1,18 @@
 #let localized-labels(main-lang) = if main-lang == "pl" {
   (
-    outline-title: [Spis treści],
-    figure-supplement: [Rys.],
-    table-supplement: [Tabela],
-    listing-supplement: [Listing],
-    symbols-list-title: [Alfabetyczny wykaz oznaczeń],
+    outline-title: "Spis treści",
+    figure-supplement: "Rys.",
+    table-supplement: "Tabela",
+    listing-supplement: "Listing",
+    symbols-list-title: "Alfabetyczny wykaz oznaczeń",
   )
 } else {
   (
-    outline-title: [Table of contents],
-    figure-supplement: [Fig.],
-    table-supplement: [Table],
-    listing-supplement: [Listing],
-    symbols-list-title: [List of symbols],
+    outline-title: "Table of contents",
+    figure-supplement: "Fig.",
+    table-supplement: "Table",
+    listing-supplement: "Listing",
+    symbols-list-title: "List of symbols",
   )
 }
 

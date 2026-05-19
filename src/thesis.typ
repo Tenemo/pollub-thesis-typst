@@ -90,13 +90,14 @@
 #let thesis(
   body,
   main-lang: "pl",
-  title-pl: [Polski tytuł pracy],
-  title-en: [English thesis title],
+  title-primary: "English thesis title",
+  title-secondary: none,
   authors: ((name: "Jan Kowalski", album-number: "000000"),),
   supervisor: "dr inż. Jan Nowak",
-  degree-label: ([Praca dyplomowa], [magisterska]),
-  field-of-study: [na kierunku Informatyka],
-  diploma-block: [na bloku dyplomowania Aplikacje Internetowe],
+  degree-label-primary: "Master's thesis",
+  degree-label-secondary: none,
+  field-of-study: "in the field of Computer Science",
+  specialization: none,
   city: "Lublin",
   year: "2026",
   abstract-pl: [Krótki opis pracy po polsku.],
@@ -105,10 +106,10 @@
   keywords-en: (),
   title-header-image: default-title-header-image,
   outline-title: none,
-  abstract-pl-title: [Streszczenie],
-  abstract-en-title: [Abstract],
-  keywords-pl-label: [Słowa kluczowe:],
-  keywords-en-label: [Keywords:],
+  abstract-pl-title: "Streszczenie",
+  abstract-en-title: "Abstract",
+  keywords-pl-label: "Słowa kluczowe:",
+  keywords-en-label: "Keywords:",
   figure-supplement: none,
   table-supplement: none,
   listing-supplement: none,
@@ -135,8 +136,14 @@
     body
   }
 
+  let document-title = if title-primary != none and title-primary != [] {
+    title-primary
+  } else {
+    title-secondary
+  }
+
   set document(
-    title: title-pl,
+    title: document-title,
     author: author-names,
     keywords: keywords-pl + keywords-en,
   )
@@ -282,13 +289,14 @@
     #set page(numbering: none)
     #title-page(
       title-header-image,
-      title-pl,
-      title-en,
+      title-primary,
+      title-secondary,
       authors,
       supervisor,
-      degree-label,
+      degree-label-primary,
+      degree-label-secondary,
       field-of-study,
-      diploma-block,
+      specialization,
       city,
       year,
     )
@@ -298,21 +306,21 @@
     #set page(numbering: "1")
 
     #abstract-section(
-      abstract-pl-title,
-      abstract-pl,
-      keywords-pl,
-      keywords-pl-label,
-      "pl",
-    )
-
-    #pagebreak()
-
-    #abstract-section(
       abstract-en-title,
       abstract-en,
       keywords-en,
       keywords-en-label,
       "en",
+    )
+
+    #pagebreak()
+
+    #abstract-section(
+      abstract-pl-title,
+      abstract-pl,
+      keywords-pl,
+      keywords-pl-label,
+      "pl",
     )
 
     #pagebreak()

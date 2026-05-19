@@ -11,25 +11,34 @@
 #let title-page-width = 15.2cm
 #let title-page-logo-top = -0.45cm
 #let title-page-degree-top = 5.87cm
-#let title-page-study-top = 9.54cm
+#let title-page-study-top = 8.5cm
 #let title-page-titles-top = 12.07cm
 #let title-page-author-top = 17.19cm
 #let title-page-supervisor-top = 23.38cm
 #let title-page-footer-top = 25.61cm
-#let title-page-title-gap = 0.85cm
 #let title-page-title-to-author-gap = 1.7cm
 #let title-page-author-entry-gap = 0.8cm
 #let title-page-author-to-supervisor-gap = 1.1cm
 #let title-page-footer-gap = 0.8cm
+#let title-page-degree-primary-size = 40pt
+#let title-page-degree-secondary-size = 20pt
+#let title-page-degree-secondary-gap = 0.5cm
+#let title-page-title-primary-size = 16pt
+#let title-page-title-secondary-size = 11pt
+#let title-page-study-size = 11pt
+#let title-page-study-line-gap = 0.25cm
 #let title-page-title-leading = 0.5em
+#let title-page-title-secondary-leading = 0.45em
 #let title-page-study-leading = 0.42em
 
-#let title-frame(body, lang: "pl") = box(width: title-page-width)[
-  #set text(font: title-page-font, size: 16pt, weight: 400, lang: lang)
+#let has-title-page-content(value) = value != none and value != [] and value != ""
+
+#let title-frame(body, size, leading) = box(width: title-page-width)[
+  #set text(font: title-page-font, size: size, weight: 400)
   #set par(
     justify: false,
     spacing: 0pt,
-    leading: title-page-title-leading,
+    leading: leading,
     first-line-indent: (amount: 0pt, all: true),
   )
   #body
@@ -55,13 +64,14 @@
 
 #let title-page(
   title-header-image,
-  title-pl,
-  title-en,
+  title-primary,
+  title-secondary,
   authors,
   supervisor,
-  degree-label,
+  degree-label-primary,
+  degree-label-secondary,
   field-of-study,
-  diploma-block,
+  specialization,
   city,
   year,
 ) = [
@@ -86,33 +96,55 @@
         spacing: 0pt,
         first-line-indent: (amount: 0pt, all: true),
       )
-      #text(font: title-page-font, size: 40pt, weight: 400, lang: "pl")[
-        #apply-polish-typography(degree-label.at(0, default: []))
+      #let has-degree-label-primary = has-title-page-content(degree-label-primary)
+      #let has-degree-label-secondary = has-title-page-content(degree-label-secondary)
+      #if has-degree-label-primary [
+        #text(font: title-page-font, size: title-page-degree-primary-size, weight: 400)[
+          #degree-label-primary
+        ]
       ]
-      #v(0.4cm)
-      #text(font: title-page-font, size: 40pt, weight: 400, lang: "pl")[
-        #apply-polish-typography(degree-label.at(1, default: []))
+      #if has-degree-label-primary and has-degree-label-secondary [
+        #v(title-page-degree-secondary-gap)
+      ]
+      #if has-degree-label-secondary [
+        #text(font: title-page-font, size: title-page-degree-secondary-size, weight: 400)[
+          #degree-label-secondary
+        ]
       ]
     ]
 
     let study-frame = box(width: title-page-width)[
-      #set text(font: title-page-font, size: 12pt, weight: 400, lang: "pl")
+      #set text(font: title-page-font, size: title-page-study-size, weight: 400)
       #set par(
         justify: false,
         spacing: 0pt,
         leading: title-page-study-leading,
         first-line-indent: (amount: 0pt, all: true),
       )
-      #apply-polish-typography(field-of-study)
-      #linebreak()
-      #apply-polish-typography(diploma-block)
+      #let has-field-of-study = has-title-page-content(field-of-study)
+      #let has-specialization = has-title-page-content(specialization)
+      #if has-field-of-study [
+        #block[#field-of-study]
+      ]
+      #if has-field-of-study and has-specialization [
+        #v(title-page-study-line-gap)
+      ]
+      #if has-specialization [
+        #block[specialization: #specialization]
+      ]
     ]
 
     let titles-frame = box(width: title-page-width)[
-      #title-frame(apply-polish-typography(title-pl), lang: "pl")
-      #if title-en != none and title-en != [] [
-        #v(title-page-title-gap)
-        #title-frame(title-en, lang: "en")
+      #let has-title-primary = has-title-page-content(title-primary)
+      #let has-title-secondary = has-title-page-content(title-secondary)
+      #if has-title-primary [
+        #title-frame(title-primary, title-page-title-primary-size, title-page-title-leading)
+      ]
+      #if has-title-primary and has-title-secondary [
+        #v(0.35cm)
+      ]
+      #if has-title-secondary [
+        #title-frame(title-secondary, title-page-title-secondary-size, title-page-title-secondary-leading)
       ]
     ]
 
@@ -131,7 +163,9 @@
       title-page-author-top,
       title-bottom + title-page-title-to-author-gap,
     )
-    let latest-supervisor-top = title-page-footer-top - title-page-footer-gap - measure(footer-frame).height - measure(supervisor-frame).height
+    let latest-supervisor-top = (
+      title-page-footer-top - title-page-footer-gap - measure(footer-frame).height - measure(supervisor-frame).height
+    )
     let author-top = calc.min(
       ideal-author-top,
       latest-supervisor-top - title-page-author-to-supervisor-gap - measure(author-frame).height,

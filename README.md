@@ -40,12 +40,14 @@ Current rendered preview: [template-preview.pdf](./template-preview.pdf)
 
 #show: thesis.with(
   main-lang: "en",
-  title-pl: [Polish thesis title],
-  title-en: [English thesis title],
+  title-primary: "English thesis title",
+  title-secondary: "Polish thesis title",
   authors: ((name: "John Smith", album-number: "123456"),),
   supervisor: "dr Jan Nowak",
-  field-of-study: [in the field of Computer Science],
-  diploma-block: [in the diploma block Web applications],
+  degree-label-primary: "Master's thesis",
+  degree-label-secondary: "Praca dyplomowa magisterska",
+  field-of-study: "in the field of Computer Science",
+  specialization: "Data science",
   screen-mode: true,
 )
 
@@ -94,12 +96,14 @@ Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-pr
 
 #show: thesis.with(
   main-lang: "pl",
-  title-pl: [Polski tytuł pracy],
-  title-en: [English thesis title],
+  title-primary: "Polski tytuł pracy",
+  title-secondary: "English thesis title",
   authors: ((name: "Jan Kowalski", album-number: "123456"),),
   supervisor: "dr inż. Jan Nowak",
-  field-of-study: [na kierunku Informatyka],
-  diploma-block: [na bloku dyplomowania Aplikacje Internetowe],
+  degree-label-primary: "Praca dyplomowa magisterska",
+  degree-label-secondary: "Master's thesis",
+  field-of-study: "in the field of Computer Science",
+  specialization: "Data science",
   screen-mode: true,
 )
 
