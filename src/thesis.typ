@@ -105,6 +105,7 @@
   abstract-en: [],
   keywords-en: (),
   title-header-image: default-title-header-image,
+  title-header-image-left: none,
   outline-title: none,
   abstract-pl-title: "Streszczenie",
   abstract-en-title: "Abstract",
@@ -295,6 +296,7 @@
     #set page(numbering: none)
     #title-page(
       title-header-image,
+      title-header-image-left,
       title-primary,
       title-secondary,
       authors,

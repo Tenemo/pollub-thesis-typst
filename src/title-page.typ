@@ -99,6 +99,7 @@
 
 #let title-page(
   title-header-image,
+  title-header-image-left,
   title-primary,
   title-secondary,
   authors,
@@ -120,6 +121,11 @@
 
     let author-count = calc.min(authors.len(), title-page-author-slot-count)
     let rendered-authors = authors.slice(0, author-count)
+    let resolved-title-header-image-left = if title-header-image-left == none {
+      title-page-content-left
+    } else {
+      title-header-image-left
+    }
 
     let degree-frame = box(width: title-page-content-width)[
       #set par(
@@ -184,7 +190,7 @@
     let supervisor-frame = box(width: title-page-content-width)[
       #set text(font: title-page-font, size: title-page-supervisor-size, weight: title-page-text-weight, lang: title-page-language)
       #if has-title-page-content(supervisor) [
-        #apply-polish-typography([Promotor #supervisor])
+        #apply-polish-typography([#supervisor])
       ]
     ]
     let footer-frame = box(width: title-page-content-width)[
@@ -226,7 +232,7 @@
 
     [
       #if title-header-image != none [
-        #place(top + left, dx: title-page-content-left, dy: title-page-header-image-top)[
+        #place(top + left, dx: resolved-title-header-image-left, dy: title-page-header-image-top)[
           #title-header-image
         ]
       ]

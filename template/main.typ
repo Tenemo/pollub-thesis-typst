@@ -13,7 +13,7 @@
       (name: "inż. Anna Nowak", album-number: "123457"),
       (name: "inż. Piotr Zieliński", album-number: "123458"),
     ),
-    supervisor: "dr inż. Jan Nowak",
+    supervisor: "Promotor: dr inż. Jan Nowak",
     degree-label-primary: "Master's thesis",
     degree-label-secondary: "Praca dyplomowa magisterska",
     field-of-study: "in the field of computer science",
