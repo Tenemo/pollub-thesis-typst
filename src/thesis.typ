@@ -90,19 +90,19 @@
 #let thesis(
   body,
   main-lang: "pl",
-  title-primary: "English thesis title",
+  title-primary: none,
   title-secondary: none,
-  authors: ((name: "Jan Kowalski", album-number: "000000"),),
-  supervisor: "dr inż. Jan Nowak",
-  degree-label-primary: "Master's thesis",
+  authors: (),
+  supervisor: none,
+  degree-label-primary: none,
   degree-label-secondary: none,
-  field-of-study: "in the field of Computer Science",
+  field-of-study: none,
   specialization: none,
-  city: "Lublin",
-  year: "2026",
-  abstract-pl: [Krótki opis pracy po polsku.],
+  city: none,
+  year: none,
+  abstract-pl: [],
   keywords-pl: (),
-  abstract-en: [A short English abstract.],
+  abstract-en: [],
   keywords-en: (),
   title-header-image: default-title-header-image,
   outline-title: none,
@@ -129,7 +129,11 @@
   } else {
     polish-typography
   }
-  let author-names = authors.map(author => author.at("name", default: "")).join(", ")
+  let author-names = if authors.len() > 0 {
+    authors.map(author => author.at("name", default: "")).join(", ")
+  } else {
+    ""
+  }
   let main-body = if enable-polish-typography {
     apply-polish-typography(body)
   } else {
@@ -138,8 +142,10 @@
 
   let document-title = if title-primary != none and title-primary != [] {
     title-primary
-  } else {
+  } else if title-secondary != none and title-secondary != [] {
     title-secondary
+  } else {
+    ""
   }
 
   set document(

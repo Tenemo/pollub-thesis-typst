@@ -16,8 +16,8 @@
     supervisor: "dr inż. Jan Nowak",
     degree-label-primary: "Master's thesis",
     degree-label-secondary: "Praca dyplomowa magisterska",
-    field-of-study: "in the field of Computer Science",
-    specialization: "Data science",
+    field-of-study: "in the field of computer science",
+    specialization: "data science",
     city: "Lublin",
     year: "2026",
     abstract-pl: [
