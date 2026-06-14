@@ -28,7 +28,7 @@ Current rendered preview: [template-preview.pdf](./template-preview.pdf)
 - `screen-mode` defaults to `true` for symmetric side margins on screen; set it to `false` for the final print and binding layout
 - `authors` expects 1 to 3 records with `name` and `album-number`
 - use the bundled `apa.csl` for bibliography formatting
-- `apa.csl` is an unmodified copy of the official APA CSL from `https://github.com/citation-style-language/styles/blob/master/apa.csl`
+- `apa.csl` is an APA 7 style adapted to the WEII diploma guidelines: it keeps APA 7 reference-entry formatting but uses numbered `[n]` in-text citations and a numbered, alphabetically ordered reference list (adapted from the official APA CSL at `https://github.com/citation-style-language/styles/blob/master/apa.csl`)
 - `symbols-list` is optional and is inserted between the table of contents and chapter 1
 - separate lists of figures, tables, and formulas are intentionally omitted
 - add the bibliography explicitly at the end of the document
@@ -84,7 +84,7 @@ Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-pr
 - `screen-mode` domyślnie ma wartość `true`, aby dać symetryczne marginesy boczne na ekranie; ustaw `false` dla końcowego układu do druku i oprawy
 - `authors` oczekuje od 1 do 3 rekordów z polami `name` i `album-number`
 - do formatowania bibliografii używaj dołączonego pliku `apa.csl`
-- `apa.csl` to niezmodyfikowana kopia oficjalnego stylu APA CSL z `https://github.com/citation-style-language/styles/blob/master/apa.csl`
+- `apa.csl` to styl APA 7 dostosowany do wytycznych dyplomowych WEII: zachowuje formatowanie opisów bibliograficznych APA 7, ale stosuje numerowane odsyłacze `[n]` w tekście oraz numerowaną, uporządkowaną alfabetycznie listę literatury (zaadaptowany z oficjalnego stylu APA CSL z `https://github.com/citation-style-language/styles/blob/master/apa.csl`)
 - `symbols-list` jest opcjonalny i trafia między spis treści a rozdział 1
 - osobne spisy rysunków, tabel i wzorów są celowo pominięte
 - bibliografię dodaj jawnie na końcu dokumentu
