@@ -73,12 +73,6 @@
     first-line-indent: (amount: 0.85cm, all: true),
   )
   #heading(level: 1, numbering: none, outlined: true)[#title]
-  #set par(
-    justify: true,
-    spacing: body-par-spacing,
-    leading: body-leading,
-    first-line-indent: (amount: 0.85cm, all: true),
-  )
   #resolved-body
   #if keywords.len() > 0 [
     #v(1.4em)
@@ -191,6 +185,8 @@
     leading: body-leading,
     first-line-indent: (amount: 0.85cm, all: true),
   )
+  set list(indent: 0.85cm)
+  set enum(indent: 0.85cm)
   set heading(numbering: "1.1.1.")
   set figure(numbering: sectioned-numbering)
   set math.equation(numbering: equation-numbering)
