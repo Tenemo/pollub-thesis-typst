@@ -16,20 +16,12 @@
   )
 }
 
-#let polish-letters = "A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż"
-
-#let protect-internal-single-letter-word(it) = {
-  let chars = it.text.clusters()
-  [#chars.at(0)#chars.at(1)#sym.space.nobreak#chars.at(3)]
-}
-
-#let protect-leading-single-letter-word(it) = {
-  let chars = it.text.clusters()
-  [#chars.at(0)#sym.space.nobreak#chars.at(2)]
-}
+// Polish typography keeps a one-letter word (a, i, o, u, w, z) on the same
+// line as the word after it. The word boundary before the letter limits the
+// match to one-letter words, so the last letter of a longer word is not bound.
+#let bind-single-letter-word(it) = [#it.text.clusters().at(0)#sym.space.nobreak]
 
 #let apply-polish-typography(body) = {
-  show regex("(?i) [aiouwz] [" + polish-letters + "]"): protect-internal-single-letter-word
-  show regex("(?i)[aiouwz] [" + polish-letters + "]"): protect-leading-single-letter-word
+  show regex("(?i)\b[aiouwz] "): bind-single-letter-word
   body
 }
