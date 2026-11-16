@@ -17,7 +17,7 @@
     degree-label-primary: "Master's thesis",
     degree-label-secondary: "Praca dyplomowa magisterska",
     field-of-study: "in the field of computer science",
-    specialization: "data science",
+    specialization: "specialization: data science",
     city: "Lublin",
     year: "2026",
     abstract-pl: [
@@ -34,8 +34,8 @@
       listings, and a single APA 7 bibliography on a compact two-chapter example.
     ],
     keywords-en: ("typst", "WEII", "POLLUB", "thermoelectric cooling"),
-    // defaults to true for a screen-reading PDF with symmetric side margins.
-    // set to false for the final print and binding layout.
+    // true gives a screen-reading PDF with symmetric side margins.
+    // the default, false, gives the final print and binding layout.
     screen-mode: true,
   )
 

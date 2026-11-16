@@ -12,8 +12,20 @@
   "(" + str(section) + "." + str(n) + ")"
 }
 
-#let body-leading = 0.7em
+// The faculty rules require 1.5 line spacing for the 12 pt body text. In a
+// word processor, single spacing of Times New Roman is its ascender plus
+// descender plus line gap, (1825 + 443 + 87) / 2048 em, so 1.5 spacing puts
+// the baselines 1.5 times that apart, about 20.7 pt at 12 pt. Typst's leading
+// is measured from the baseline of one line to the cap height of the next
+// (default `top-edge` and `bottom-edge`), and the cap height of Times New Roman
+// is 1356 / 2048 em, so the leading is the baseline distance minus the cap
+// height.
+#let body-leading = (1.5 * (1825 + 443 + 87) - 1356) / 2048 * 1em
 #let body-par-spacing = body-leading
+// Captions, table cells, listings and footnotes are not body text and keep the
+// tighter spacing they had before the body text moved to 1.5 spacing.
+#let compact-leading = 0.7em
+#let abstract-gap = 2em
 #let screen-side-margin = 2.75cm
 #let object-block-spacing = 18pt
 #let caption-block-spacing = 6pt
@@ -111,7 +123,7 @@
   symbols-list: none,
   symbols-list-title: none,
   polish-typography: none,
-  screen-mode: true,
+  screen-mode: false,
 ) = {
   let labels = localized-labels(main-lang)
   let resolved-outline-title = resolve-label(labels, "outline-title", outline-title)
@@ -150,30 +162,28 @@
   )
   // `screen-mode` keeps the same text width, but switches to symmetric
   // left/right margins so the PDF is more comfortable to read on screen.
-  if screen-mode {
-    set page(
-      paper: "a4",
-      margin: (
+  // A set rule inside an `if` block would end with that block, so the mode
+  // selects the margins inside one set rule that applies to the whole document.
+  set page(
+    paper: "a4",
+    binding: left,
+    margin: if screen-mode {
+      (
         top: 2.5cm,
         bottom: 2cm,
         left: screen-side-margin,
         right: screen-side-margin,
-      ),
-      number-align: center + bottom,
-    )
-  } else {
-    set page(
-      paper: "a4",
-      binding: left,
-      margin: (
+      )
+    } else {
+      (
         top: 2.5cm,
         bottom: 2cm,
         inside: 3.5cm,
         outside: 2cm,
-      ),
-      number-align: center + bottom,
-    )
-  }
+      )
+    },
+    number-align: center + bottom,
+  )
   set text(
     font: "Times New Roman",
     size: 12pt,
@@ -213,7 +223,7 @@
       #counter(figure.where(kind: image)).update(0)
       #counter(figure.where(kind: table)).update(0)
       #counter(figure.where(kind: "listing")).update(0)
-      #counter(math.equation.where(block: true)).update(0)
+      #counter(math.equation).update(0)
     ]
     #set text(size: 14pt, weight: "bold")
     #set par(first-line-indent: (amount: 0pt, all: true))
@@ -243,6 +253,7 @@
   )[
     #align(center)[
       #set text(size: 10pt, lang: main-lang)
+      #set par(leading: compact-leading)
       #it
     ]
   ]
@@ -271,8 +282,8 @@
   show figure.where(kind: "listing"): it => full-width-object-block(it)
   show table: set text(size: 11pt)
   show table.cell: it => {
-    set text(size: 10.5pt, hyphenate: false)
-    set par(justify: false, first-line-indent: (amount: 0pt, all: true))
+    set text(hyphenate: false)
+    set par(justify: false, leading: compact-leading, first-line-indent: (amount: 0pt, all: true))
     it
   }
   show raw.where(block: true): it => block(
@@ -282,10 +293,11 @@
     width: 100%,
   )[
     #set text(size: listing-font-size)
-    #set par(justify: false, first-line-indent: (amount: 0pt, all: true))
+    #set par(justify: false, leading: compact-leading, first-line-indent: (amount: 0pt, all: true))
     #it
   ]
   show table.cell.where(y: 0): strong
+  show footnote.entry: set par(leading: compact-leading)
   show math.equation.where(block: true): set block(above: 6pt, below: 6pt)
 
   [
@@ -303,6 +315,8 @@
       specialization,
       city,
       year,
+      main-lang,
+      enable-polish-typography,
     )
 
     #pagebreak(to: "odd")
@@ -317,7 +331,8 @@
       "en",
     )
 
-    #pagebreak()
+    // The faculty rules limit both abstracts and keyword lists to one page.
+    #v(abstract-gap)
 
     #abstract-section(
       abstract-pl-title,

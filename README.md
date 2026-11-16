@@ -4,7 +4,7 @@ Your thesis is in Polish? Jump to: [polski](#polski)
 
 ## English
 
-`pollub-thesis` is a Typst thesis template for the Lublin University of Technology, specifically Wydział Elektrotechniki i Informatyki. It provides a WEII title page, bilingual abstract pages, chapter-based numbering for figures/tables/listings/equations, and thesis layout defaults aligned with the faculty guidelines.
+`pollub-thesis` is a Typst thesis template for the Lublin University of Technology, specifically Wydział Elektrotechniki i Informatyki. It provides a WEII title page, a bilingual abstract page, chapter-based numbering for figures/tables/listings/equations, and thesis layout defaults aligned with the faculty guidelines.
 
 Current rendered preview: [template-preview.pdf](./template-preview.pdf)
 
@@ -25,10 +25,11 @@ Current rendered preview: [template-preview.pdf](./template-preview.pdf)
 ```
 
 - `main-lang` controls the body language and localized labels
-- `screen-mode` defaults to `true` for symmetric side margins on screen; set it to `false` for the final print and binding layout
+- `screen-mode` defaults to `false`, the mirrored print and binding margins the faculty requires; set it to `true` for symmetric side margins on screen
+- `field-of-study` and `specialization` are printed as given, so include the faculty wording, for example `na kierunku …` and `na bloku dyplomowania …` (master's) or `w specjalności …` (engineering)
 - `authors` expects 1 to 3 records with `name` and `album-number`
 - use the bundled `apa.csl` for bibliography formatting
-- `apa.csl` is an APA 7 style adapted to the WEII diploma guidelines: it keeps APA 7 reference-entry formatting but uses numbered `[n]` in-text citations and a numbered, alphabetically ordered reference list (adapted from the official APA CSL at `https://github.com/citation-style-language/styles/blob/master/apa.csl`)
+- `apa.csl` is an APA 7 style adapted to the WEII diploma guidelines: it keeps APA 7 reference-entry formatting, except that author lists have no ampersand and other name lists use the localized word for "and" as in the faculty examples, but uses numbered `[n]` in-text citations and a numbered, alphabetically ordered reference list (adapted from the official APA CSL at `https://github.com/citation-style-language/styles/blob/master/apa.csl`)
 - `symbols-list` is optional and is inserted between the table of contents and chapter 1
 - separate lists of figures, tables, and formulas are intentionally omitted
 - add the bibliography explicitly at the end of the document
@@ -47,7 +48,7 @@ Current rendered preview: [template-preview.pdf](./template-preview.pdf)
   degree-label-primary: "Master's thesis",
   degree-label-secondary: "Praca dyplomowa magisterska",
   field-of-study: "in the field of Computer Science",
-  specialization: "Data science",
+  specialization: "specialization: Data science",
   screen-mode: true,
 )
 
@@ -60,7 +61,7 @@ Thesis text.
 
 ## Polski
 
-`pollub-thesis` to szablon pracy dyplomowej w Typst dla Politechniki Lubelskiej, a dokładniej dla Wydziału Elektrotechniki i Informatyki. Zapewnia stronę tytułową WEII, dwujęzyczne strony ze streszczeniami, numerację rysunków/tabel/listingów/równań w obrębie rozdziałów oraz domyślne ustawienia układu pracy zgodne z wytycznymi wydziału.
+`pollub-thesis` to szablon pracy dyplomowej w Typst dla Politechniki Lubelskiej, a dokładniej dla Wydziału Elektrotechniki i Informatyki. Zapewnia stronę tytułową WEII, dwujęzyczną stronę ze streszczeniami, numerację rysunków/tabel/listingów/równań w obrębie rozdziałów oraz domyślne ustawienia układu pracy zgodne z wytycznymi wydziału.
 
 Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-preview.pdf)
 
@@ -81,10 +82,11 @@ Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-pr
 ```
 
 - `main-lang` steruje językiem głównej treści i lokalizowanymi etykietami
-- `screen-mode` domyślnie ma wartość `true`, aby dać symetryczne marginesy boczne na ekranie; ustaw `false` dla końcowego układu do druku i oprawy
+- `screen-mode` domyślnie ma wartość `false`, czyli lustrzane marginesy do druku i oprawy wymagane przez wydział; ustaw `true`, aby uzyskać symetryczne marginesy boczne na ekranie
+- `field-of-study` i `specialization` są drukowane bez zmian, więc podaj pełne sformułowanie z wzoru wydziału, np. `na kierunku …` i `na bloku dyplomowania …` (praca magisterska) albo `w specjalności …` (praca inżynierska)
 - `authors` oczekuje od 1 do 3 rekordów z polami `name` i `album-number`
 - do formatowania bibliografii używaj dołączonego pliku `apa.csl`
-- `apa.csl` to styl APA 7 dostosowany do wytycznych dyplomowych WEII: zachowuje formatowanie opisów bibliograficznych APA 7, ale stosuje numerowane odsyłacze `[n]` w tekście oraz numerowaną, uporządkowaną alfabetycznie listę literatury (zaadaptowany z oficjalnego stylu APA CSL z `https://github.com/citation-style-language/styles/blob/master/apa.csl`)
+- `apa.csl` to styl APA 7 dostosowany do wytycznych dyplomowych WEII: zachowuje formatowanie opisów bibliograficznych APA 7, poza tym że listy autorów nie zawierają znaku „&”, a pozostałe listy nazwisk łączy zlokalizowany spójnik, jak w przykładach wydziału, ale stosuje numerowane odsyłacze `[n]` w tekście oraz numerowaną, uporządkowaną alfabetycznie listę literatury (zaadaptowany z oficjalnego stylu APA CSL z `https://github.com/citation-style-language/styles/blob/master/apa.csl`)
 - `symbols-list` jest opcjonalny i trafia między spis treści a rozdział 1
 - osobne spisy rysunków, tabel i wzorów są celowo pominięte
 - bibliografię dodaj jawnie na końcu dokumentu
@@ -102,8 +104,8 @@ Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-pr
   supervisor: "Promotor: dr inż. Jan Nowak",
   degree-label-primary: "Praca dyplomowa magisterska",
   degree-label-secondary: "Master's thesis",
-  field-of-study: "in the field of Computer Science",
-  specialization: "Data science",
+  field-of-study: "na kierunku informatyka",
+  specialization: "na bloku dyplomowania Data science",
   screen-mode: true,
 )
 

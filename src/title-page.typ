@@ -2,7 +2,6 @@
 
 // Overall page
 #let title-page-font = "Times New Roman"
-#let title-page-language = "pl"
 #let title-page-text-weight = 400
 #let title-page-default-size = 12pt
 #let title-page-content-left = -0.3cm
@@ -79,17 +78,17 @@
   #body
 ]
 
-#let authors-frame(authors) = box(width: title-page-content-width)[
+#let authors-frame(authors, lang) = box(width: title-page-content-width)[
   #set par(
     justify: false,
     spacing: title-page-par-spacing,
     first-line-indent: title-page-first-line-indent,
   )
   #for (index, author) in authors.enumerate() [
-    #set text(font: title-page-font, size: title-page-author-name-size, weight: title-page-text-weight, lang: title-page-language)
+    #set text(font: title-page-font, size: title-page-author-name-size, weight: title-page-text-weight, lang: lang)
     #author.at("name", default: "")
     #linebreak()
-    #set text(font: title-page-font, size: title-page-author-album-size, weight: title-page-text-weight, lang: title-page-language)
+    #set text(font: title-page-font, size: title-page-author-album-size, weight: title-page-text-weight, lang: lang)
     #author.at("album-number", default: "")
     #if index + 1 < authors.len() [
       #v(title-page-author-entry-gap)
@@ -110,14 +109,21 @@
   specialization,
   city,
   year,
+  main-lang,
+  enable-polish-typography,
 ) = [
+  #let typeset-page-text(value) = if enable-polish-typography {
+    apply-polish-typography(value)
+  } else {
+    value
+  }
   #context {
     set par(
       justify: false,
       spacing: title-page-par-spacing,
       first-line-indent: title-page-first-line-indent,
     )
-    set text(font: title-page-font, size: title-page-default-size, lang: title-page-language, weight: title-page-text-weight)
+    set text(font: title-page-font, size: title-page-default-size, lang: main-lang, weight: title-page-text-weight)
 
     let author-count = calc.min(authors.len(), title-page-author-slot-count)
     let rendered-authors = authors.slice(0, author-count)
@@ -167,7 +173,7 @@
         #v(title-page-study-field-to-specialization-gap)
       ]
       #if has-specialization [
-        #block[specialization: #specialization]
+        #block[#specialization]
       ]
     ]
 
@@ -185,20 +191,20 @@
       ]
     ]
 
-    let author-frame = authors-frame(rendered-authors)
-    let author-slot-frame = authors-frame(title-page-author-slot-authors)
+    let author-frame = authors-frame(rendered-authors, main-lang)
+    let author-slot-frame = authors-frame(title-page-author-slot-authors, main-lang)
     let supervisor-frame = box(width: title-page-content-width)[
-      #set text(font: title-page-font, size: title-page-supervisor-size, weight: title-page-text-weight, lang: title-page-language)
+      #set text(font: title-page-font, size: title-page-supervisor-size, weight: title-page-text-weight, lang: main-lang)
       #if has-title-page-content(supervisor) [
-        #apply-polish-typography([#supervisor])
+        #typeset-page-text([#supervisor])
       ]
     ]
     let footer-frame = box(width: title-page-content-width)[
-      #set text(font: title-page-font, size: title-page-footer-size, weight: title-page-text-weight, lang: title-page-language)
+      #set text(font: title-page-font, size: title-page-footer-size, weight: title-page-text-weight, lang: main-lang)
       #let has-city = has-title-page-content(city)
       #let has-year = has-title-page-content(year)
       #if has-city or has-year [
-        #apply-polish-typography([#title-page-text(city) #title-page-text(year)])
+        #typeset-page-text([#title-page-text(city) #title-page-text(year)])
       ]
     ]
 
