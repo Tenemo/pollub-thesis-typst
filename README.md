@@ -72,6 +72,8 @@ Thesis text.
 
 The package is licensed under MIT-0 (see [LICENSE](./LICENSE)), except `template/apa.csl`, which is licensed under the [Creative Commons Attribution-ShareAlike 3.0 Unported licence](https://creativecommons.org/licenses/by-sa/3.0/) (CC BY-SA 3.0), so the manifest declares `MIT-0 AND CC-BY-SA-3.0`. Copies and adaptations of that file must keep its licence.
 
+The faculty logo in `assets/weii_logo.jpg` belongs to Lublin University of Technology. It is not covered by these licences and is included for use in theses submitted to the university.
+
 `template/apa.csl` is adapted from "APA Style 7th edition" of the [Citation Style Language styles repository](https://github.com/citation-style-language/styles/blob/master/apa.csl), by Brenton M. Wiernik and Andrew Dunning. Its own header keeps the original authors and licence. It was changed as follows:
 
 - the title and identifier name it as the Lublin University of Technology numeric variant, and its citation format is numeric;
@@ -143,6 +145,8 @@ Tekst pracy.
 ### Licencja
 
 Pakiet jest udostępniany na licencji MIT-0 (zob. [LICENSE](./LICENSE)), z wyjątkiem pliku `template/apa.csl`, który jest udostępniany na licencji [Creative Commons Uznanie autorstwa – Na tych samych warunkach 3.0 Unported](https://creativecommons.org/licenses/by-sa/3.0/) (CC BY-SA 3.0), dlatego manifest deklaruje `MIT-0 AND CC-BY-SA-3.0`. Kopie i adaptacje tego pliku muszą zachować jego licencję.
+
+Logo wydziału w pliku `assets/weii_logo.jpg` należy do Politechniki Lubelskiej. Nie jest objęte tymi licencjami i zostało dołączone do użytku w pracach dyplomowych składanych na uczelni.
 
 `template/apa.csl` jest adaptacją stylu „APA Style 7th edition” z [repozytorium stylów Citation Style Language](https://github.com/citation-style-language/styles/blob/master/apa.csl), autorstwa Brentona M. Wiernika i Andrew Dunninga. Nagłówek pliku zachowuje pierwotnych autorów i licencję. Wprowadzone zmiany:
 
