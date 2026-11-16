@@ -16,25 +16,35 @@
 )
 #let title-page-header-image-top = -0.5cm
 
+// Times New Roman metrics, in units of 2048 per em. Single line spacing puts
+// baselines (ascender + descender + line gap) apart, and Typst's leading runs
+// from one baseline to the cap height of the next line.
+#let title-page-single-leading = (1825 + 443 + 87 - 1356) / 2048 * 1em
+#let title-page-descender = 443 / 2048
+
+// The degree label, the study details and the titles follow each other: each
+// starts at its usual position, or lower when the block above it is taller, so
+// a label that wraps never runs into the next block.
+
 // Degree label
 #let title-page-degree-top = 7cm
 #let title-page-degree-primary-size = 40pt
 #let title-page-degree-secondary-size = 20pt
 #let title-page-degree-primary-to-secondary-gap = 0.4cm
+#let title-page-degree-to-study-gap = 0.25cm
 
 // Study details
 #let title-page-study-top = 9.2cm
 #let title-page-study-size = 12pt
 #let title-page-study-field-to-specialization-gap = 0.3cm
 #let title-page-study-leading = 0.42em
+#let title-page-study-to-title-gap = 1cm
 
-// Thesis title
+// Thesis titles: the faculty model gives the Polish title, then the English
+// title, in the same size.
 #let title-page-title-top = 12.5cm
-#let title-page-title-primary-size = 20pt
-#let title-page-title-secondary-size = 12pt
-#let title-page-title-primary-to-secondary-gap = 0.35cm
-#let title-page-title-primary-leading = 0.5em
-#let title-page-title-secondary-leading = 0.45em
+#let title-page-title-size = 16pt
+#let title-page-title-gap = 0.8cm
 #let title-page-title-to-author-gap = 1.7cm
 
 // Authors
@@ -125,6 +135,9 @@
     )
     set text(font: title-page-font, size: title-page-default-size, lang: main-lang, weight: title-page-text-weight)
 
+    // The faculty rules allow a thesis in Polish or in English, and the
+    // secondary labels and title are in the other of the two languages.
+    let other-lang = if main-lang == "pl" { "en" } else { "pl" }
     let author-count = calc.min(authors.len(), title-page-author-slot-count)
     let rendered-authors = authors.slice(0, author-count)
     let resolved-title-header-image-left = if title-header-image-left == none {
@@ -133,28 +146,33 @@
       title-header-image-left
     }
 
+    let has-degree-label-primary = has-title-page-content(degree-label-primary)
+    let has-degree-label-secondary = has-title-page-content(degree-label-secondary)
     let degree-frame = box(width: title-page-content-width)[
+      #set text(font: title-page-font, weight: title-page-text-weight)
       #set par(
         justify: false,
         spacing: title-page-par-spacing,
+        leading: title-page-single-leading,
         first-line-indent: title-page-first-line-indent,
       )
-      #let has-degree-label-primary = has-title-page-content(degree-label-primary)
-      #let has-degree-label-secondary = has-title-page-content(degree-label-secondary)
       #if has-degree-label-primary [
-        #text(font: title-page-font, size: title-page-degree-primary-size, weight: title-page-text-weight)[
-          #degree-label-primary
-        ]
+        #text(size: title-page-degree-primary-size, lang: main-lang)[#degree-label-primary]
       ]
       #if has-degree-label-primary and has-degree-label-secondary [
         #v(title-page-degree-primary-to-secondary-gap)
       ]
       #if has-degree-label-secondary [
-        #text(font: title-page-font, size: title-page-degree-secondary-size, weight: title-page-text-weight)[
-          #degree-label-secondary
-        ]
+        #text(size: title-page-degree-secondary-size, lang: other-lang)[#degree-label-secondary]
       ]
     ]
+    // The frame ends at the last baseline, so the gap below it also clears the
+    // descenders of the last degree label line.
+    let degree-last-line-size = if has-degree-label-secondary {
+      title-page-degree-secondary-size
+    } else {
+      title-page-degree-primary-size
+    }
 
     let study-frame = box(width: title-page-content-width)[
       #set text(font: title-page-font, size: title-page-study-size, weight: title-page-text-weight)
@@ -177,17 +195,22 @@
       ]
     ]
 
+    let (title-polish, title-english) = if main-lang == "pl" {
+      (title-primary, title-secondary)
+    } else {
+      (title-secondary, title-primary)
+    }
     let titles-frame = box(width: title-page-content-width)[
-      #let has-title-primary = has-title-page-content(title-primary)
-      #let has-title-secondary = has-title-page-content(title-secondary)
-      #if has-title-primary [
-        #title-frame(title-primary, title-page-title-primary-size, title-page-title-primary-leading)
+      #let has-title-polish = has-title-page-content(title-polish)
+      #let has-title-english = has-title-page-content(title-english)
+      #if has-title-polish [
+        #title-frame(text(lang: "pl", apply-polish-typography(title-polish)), title-page-title-size, title-page-single-leading)
       ]
-      #if has-title-primary and has-title-secondary [
-        #v(title-page-title-primary-to-secondary-gap)
+      #if has-title-polish and has-title-english [
+        #v(title-page-title-gap)
       ]
-      #if has-title-secondary [
-        #title-frame(title-secondary, title-page-title-secondary-size, title-page-title-secondary-leading)
+      #if has-title-english [
+        #title-frame(text(lang: "en", title-english), title-page-title-size, title-page-single-leading)
       ]
     ]
 
@@ -208,9 +231,20 @@
       ]
     ]
 
+    let degree-bottom = title-page-degree-top + measure(degree-frame).height
+    let study-top = calc.max(
+      title-page-study-top,
+      degree-bottom + title-page-descender * degree-last-line-size + title-page-degree-to-study-gap,
+    )
+    let study-bottom = study-top + measure(study-frame).height
+    let title-top = calc.max(
+      title-page-title-top,
+      study-bottom + title-page-descender * title-page-study-size + title-page-study-to-title-gap,
+    )
+
     let author-frame-height = measure(author-frame).height
     let author-slot-frame-height = measure(author-slot-frame).height
-    let title-bottom = title-page-title-top + measure(titles-frame).height
+    let title-bottom = title-top + measure(titles-frame).height
     let author-layout-top = if rendered-authors.len() > 0 {
       title-page-author-top + author-slot-frame-height - author-frame-height
     } else {
@@ -247,11 +281,11 @@
         #degree-frame
       ]
 
-      #place(top + left, dx: title-page-content-left, dy: title-page-study-top)[
+      #place(top + left, dx: title-page-content-left, dy: study-top)[
         #study-frame
       ]
 
-      #place(top + left, dx: title-page-content-left, dy: title-page-title-top)[
+      #place(top + left, dx: title-page-content-left, dy: title-top)[
         #titles-frame
       ]
 

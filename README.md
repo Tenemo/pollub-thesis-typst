@@ -27,6 +27,9 @@ Current rendered preview: [template-preview.pdf](./template-preview.pdf)
 - `main-lang` controls the body language and localized labels
 - `screen-mode` defaults to `false`, the mirrored print and binding margins the faculty requires; set it to `true` for symmetric side margins on screen
 - `field-of-study` and `specialization` are printed as given, so include the faculty wording, for example `na kierunku …` and `na bloku dyplomowania …` (master's) or `w specjalności …` (engineering)
+- the title page follows the faculty model (Załącznik 5): the degree label, the field of study and diploma block lines, the Polish title, then the English title in the same size, the authors, the supervisor, and the city and year; `title-primary` is the title in `main-lang` and `title-secondary` the title in the other language, and the Polish one is always printed first
+- the faculty model has a single degree label, for example `Praca dyplomowa magisterska`, and a supervisor line `Promotor` followed by the title, degree and name; the rules give no English wording, so an English thesis supplies its own labels, and `degree-label-secondary` is an optional second degree label in the other language
+- a degree label or field of study that wraps pushes the blocks below it down instead of overlapping them
 - `authors` expects 1 to 3 records with `name` and `album-number`
 - use the bundled `apa.csl` for bibliography formatting
 - `apa.csl` is an APA 7 style adapted to the WEII diploma guidelines: it keeps APA 7 reference-entry formatting, except that author lists have no ampersand and other name lists use the localized word for "and" as in the faculty examples, but uses numbered `[n]` in-text citations and a numbered, alphabetically ordered reference list (adapted from the official APA CSL at `https://github.com/citation-style-language/styles/blob/master/apa.csl`)
@@ -84,6 +87,9 @@ Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-pr
 - `main-lang` steruje językiem głównej treści i lokalizowanymi etykietami
 - `screen-mode` domyślnie ma wartość `false`, czyli lustrzane marginesy do druku i oprawy wymagane przez wydział; ustaw `true`, aby uzyskać symetryczne marginesy boczne na ekranie
 - `field-of-study` i `specialization` są drukowane bez zmian, więc podaj pełne sformułowanie z wzoru wydziału, np. `na kierunku …` i `na bloku dyplomowania …` (praca magisterska) albo `w specjalności …` (praca inżynierska)
+- strona tytułowa odpowiada wzorowi wydziału (Załącznik 5): rodzaj pracy, wiersze kierunku i bloku dyplomowania, tytuł polski, a pod nim tytuł angielski tej samej wielkości, autorzy, promotor oraz miejscowość i rok; `title-primary` to tytuł w języku `main-lang`, a `title-secondary` w drugim języku, przy czym tytuł polski zawsze jest pierwszy
+- wzór wydziału ma jeden napis z rodzajem pracy, np. `Praca dyplomowa magisterska`, oraz wiersz `Promotor` z tytułem, stopniem, imieniem i nazwiskiem; zasady nie podają brzmienia angielskiego, więc praca w języku angielskim podaje własne etykiety, a `degree-label-secondary` to opcjonalny drugi napis w drugim języku
+- zawijający się rodzaj pracy lub kierunek przesuwa niższe bloki w dół zamiast na nie nachodzić
 - `authors` oczekuje od 1 do 3 rekordów z polami `name` i `album-number`
 - do formatowania bibliografii używaj dołączonego pliku `apa.csl`
 - `apa.csl` to styl APA 7 dostosowany do wytycznych dyplomowych WEII: zachowuje formatowanie opisów bibliograficznych APA 7, poza tym że listy autorów nie zawierają znaku „&”, a pozostałe listy nazwisk łączy zlokalizowany spójnik, jak w przykładach wydziału, ale stosuje numerowane odsyłacze `[n]` w tekście oraz numerowaną, uporządkowaną alfabetycznie listę literatury (zaadaptowany z oficjalnego stylu APA CSL z `https://github.com/citation-style-language/styles/blob/master/apa.csl`)
@@ -101,9 +107,8 @@ Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-pr
   title-primary: "Polski tytuł pracy",
   title-secondary: "English thesis title",
   authors: ((name: "Jan Kowalski", album-number: "123456"),),
-  supervisor: "Promotor: dr inż. Jan Nowak",
+  supervisor: "Promotor dr inż. Jan Nowak",
   degree-label-primary: "Praca dyplomowa magisterska",
-  degree-label-secondary: "Master's thesis",
   field-of-study: "na kierunku informatyka",
   specialization: "na bloku dyplomowania Data science",
   screen-mode: true,

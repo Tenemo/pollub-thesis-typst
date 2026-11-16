@@ -6,18 +6,17 @@
 #let template-document(thesis) = [
   #show: thesis.with(
     main-lang: "pl",
-    title-primary: "Characterisation of a thermoelectric cooling setup as a function of drive current",
-    title-secondary: "Charakterystyka układu chłodzenia termoelektrycznego w funkcji prądu sterującego",
+    title-primary: "Charakterystyka układu chłodzenia termoelektrycznego w funkcji prądu sterującego",
+    title-secondary: "Characterisation of a thermoelectric cooling setup as a function of drive current",
     authors: (
       (name: "inż. Jan Kowalski", album-number: "123456"),
       (name: "inż. Anna Nowak", album-number: "123457"),
       (name: "inż. Piotr Zieliński", album-number: "123458"),
     ),
-    supervisor: "Promotor: dr inż. Jan Nowak",
-    degree-label-primary: "Master's thesis",
-    degree-label-secondary: "Praca dyplomowa magisterska",
-    field-of-study: "in the field of computer science",
-    specialization: "specialization: data science",
+    supervisor: "Promotor dr inż. Jan Nowak",
+    degree-label-primary: "Praca dyplomowa magisterska",
+    field-of-study: "na kierunku informatyka",
+    specialization: "na bloku dyplomowania inżynieria oprogramowania",
     city: "Lublin",
     year: "2026",
     abstract-pl: [
