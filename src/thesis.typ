@@ -323,23 +323,25 @@
     #counter(page).update(3)
     #set page(numbering: "1")
 
-    #abstract-section(
-      abstract-en-title,
-      abstract-en,
-      keywords-en,
-      keywords-en-label,
-      "en",
-    )
-
-    // The faculty rules limit both abstracts and keyword lists to one page.
-    #v(abstract-gap)
-
+    // The faculty rules list the Polish abstract and keywords before the
+    // English ones, whatever the language of the thesis, and limit both
+    // abstracts and keyword lists to one page.
     #abstract-section(
       abstract-pl-title,
       abstract-pl,
       keywords-pl,
       keywords-pl-label,
       "pl",
+    )
+
+    #v(abstract-gap)
+
+    #abstract-section(
+      abstract-en-title,
+      abstract-en,
+      keywords-en,
+      keywords-en-label,
+      "en",
     )
 
     #pagebreak()
