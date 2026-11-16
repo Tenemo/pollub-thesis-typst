@@ -1,3 +1,5 @@
+This licence covers every file of the package except template/apa.csl, which is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported licence (https://creativecommons.org/licenses/by-sa/3.0/), as its own header states. README.md credits that file's authors and lists the changes made to it.
+
 MIT No Attribution
 
 Copyright (c) 2026 Piotr Piech

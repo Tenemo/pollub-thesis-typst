@@ -62,6 +62,18 @@ Thesis text.
 #bibliography("references.bib", style: "apa.csl", title: [Bibliography])
 ```
 
+### Licence
+
+The package is licensed under MIT-0 (see [LICENSE](./LICENSE)), except `template/apa.csl`, which is licensed under the [Creative Commons Attribution-ShareAlike 3.0 Unported licence](https://creativecommons.org/licenses/by-sa/3.0/) (CC BY-SA 3.0), so the manifest declares `MIT-0 AND CC-BY-SA-3.0`. Copies and adaptations of that file must keep its licence.
+
+`template/apa.csl` is adapted from "APA Style 7th edition" of the [Citation Style Language styles repository](https://github.com/citation-style-language/styles/blob/master/apa.csl), by Brenton M. Wiernik and Andrew Dunning. Its own header keeps the original authors and licence. It was changed as follows:
+
+- the title and identifier name it as the Lublin University of Technology numeric variant, and its citation format is numeric;
+- in-text citations are numbered `[n]`, in citation-number order, instead of author and date;
+- reference list entries start with their `[n]` number, aligned flush instead of with a hanging indent, and stay in alphabetical order;
+- author lists have no ampersand before the last name, and other name lists use the localized word for "and" instead of an ampersand;
+- the comma before a month and day is attached to the month and day instead of separating the parts of the date group.
+
 ## Polski
 
 `pollub-thesis` to szablon pracy dyplomowej w Typst dla Politechniki Lubelskiej, a dokładniej dla Wydziału Elektrotechniki i Informatyki. Zapewnia stronę tytułową WEII, dwujęzyczną stronę ze streszczeniami, numerację rysunków/tabel/listingów/równań w obrębie rozdziałów oraz domyślne ustawienia układu pracy zgodne z wytycznymi wydziału.
@@ -120,3 +132,15 @@ Tekst pracy.
 #pagebreak()
 #bibliography("references.bib", style: "apa.csl", title: [Bibliografia])
 ```
+
+### Licencja
+
+Pakiet jest udostępniany na licencji MIT-0 (zob. [LICENSE](./LICENSE)), z wyjątkiem pliku `template/apa.csl`, który jest udostępniany na licencji [Creative Commons Uznanie autorstwa – Na tych samych warunkach 3.0 Unported](https://creativecommons.org/licenses/by-sa/3.0/) (CC BY-SA 3.0), dlatego manifest deklaruje `MIT-0 AND CC-BY-SA-3.0`. Kopie i adaptacje tego pliku muszą zachować jego licencję.
+
+`template/apa.csl` jest adaptacją stylu „APA Style 7th edition” z [repozytorium stylów Citation Style Language](https://github.com/citation-style-language/styles/blob/master/apa.csl), autorstwa Brentona M. Wiernika i Andrew Dunninga. Nagłówek pliku zachowuje pierwotnych autorów i licencję. Wprowadzone zmiany:
+
+- tytuł i identyfikator wskazują wariant numeryczny dla Politechniki Lubelskiej, a format cytowań jest numeryczny;
+- odsyłacze w tekście mają postać numerów `[n]` w kolejności numerów zamiast autora i roku;
+- pozycje listy literatury zaczynają się od numeru `[n]`, są wyrównane bez wysunięcia i pozostają w porządku alfabetycznym;
+- listy autorów nie mają znaku „&” przed ostatnim nazwiskiem, a pozostałe listy nazwisk łączy zlokalizowany spójnik zamiast znaku „&”;
+- przecinek przed miesiącem i dniem jest dołączony do miesiąca i dnia zamiast rozdzielać części grupy daty.
