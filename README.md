@@ -6,7 +6,12 @@ Your thesis is in Polish? Jump to: [polski](#polski)
 
 `pollub-thesis` is a Typst thesis template for the Lublin University of Technology, specifically Wydział Elektrotechniki i Informatyki. It provides a WEII title page, a bilingual abstract page, chapter-based numbering for figures/tables/listings/equations, and thesis layout defaults aligned with the faculty guidelines.
 
-Current rendered preview: [template-preview.pdf](./template-preview.pdf)
+Current rendered preview: [template-preview.pdf](./template-preview.pdf). Regenerate it and the thumbnail from the repository root after template changes:
+
+```text
+typst compile --root . --input local-template-preview=true template/main.typ template-preview.pdf
+typst compile --root . --input local-template-preview=true --pages 1 --ppi 144 template/main.typ thumbnail.png
+```
 
 ### Usage notes
 
@@ -33,6 +38,7 @@ Current rendered preview: [template-preview.pdf](./template-preview.pdf)
 - `authors` expects 1 to 3 records with `name` and `album-number`
 - use the bundled `apa.csl` for bibliography formatting
 - `apa.csl` is an APA 7 style adapted to the WEII diploma guidelines: it keeps APA 7 reference-entry formatting, except that author lists have no ampersand and other name lists use the localized word for "and" as in the faculty examples, but uses numbered `[n]` in-text citations and a numbered, alphabetically ordered reference list (adapted from the official APA CSL at `https://github.com/citation-style-language/styles/blob/master/apa.csl`)
+- the abstract page puts the Polish abstract and keywords before the English ones, in the order the faculty rules list them, whatever `main-lang` is
 - `symbols-list` is optional and is inserted between the table of contents and chapter 1
 - separate lists of figures, tables, and formulas are intentionally omitted
 - add the bibliography explicitly at the end of the document
@@ -78,7 +84,7 @@ The package is licensed under MIT-0 (see [LICENSE](./LICENSE)), except `template
 
 `pollub-thesis` to szablon pracy dyplomowej w Typst dla Politechniki Lubelskiej, a dokładniej dla Wydziału Elektrotechniki i Informatyki. Zapewnia stronę tytułową WEII, dwujęzyczną stronę ze streszczeniami, numerację rysunków/tabel/listingów/równań w obrębie rozdziałów oraz domyślne ustawienia układu pracy zgodne z wytycznymi wydziału.
 
-Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-preview.pdf)
+Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-preview.pdf). Po zmianach w szablonie wygeneruj go wraz z miniaturą poleceniami z sekcji angielskiej, uruchamianymi w katalogu głównym repozytorium.
 
 ### Uwagi dotyczące użycia
 
@@ -105,6 +111,7 @@ Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-pr
 - `authors` oczekuje od 1 do 3 rekordów z polami `name` i `album-number`
 - do formatowania bibliografii używaj dołączonego pliku `apa.csl`
 - `apa.csl` to styl APA 7 dostosowany do wytycznych dyplomowych WEII: zachowuje formatowanie opisów bibliograficznych APA 7, poza tym że listy autorów nie zawierają znaku „&”, a pozostałe listy nazwisk łączy zlokalizowany spójnik, jak w przykładach wydziału, ale stosuje numerowane odsyłacze `[n]` w tekście oraz numerowaną, uporządkowaną alfabetycznie listę literatury (zaadaptowany z oficjalnego stylu APA CSL z `https://github.com/citation-style-language/styles/blob/master/apa.csl`)
+- strona ze streszczeniami zawiera najpierw polskie streszczenie i słowa kluczowe, a potem angielskie, w kolejności z zasad dyplomowania, niezależnie od `main-lang`
 - `symbols-list` jest opcjonalny i trafia między spis treści a rozdział 1
 - osobne spisy rysunków, tabel i wzorów są celowo pominięte
 - bibliografię dodaj jawnie na końcu dokumentu
