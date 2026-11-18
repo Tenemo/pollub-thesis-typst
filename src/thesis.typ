@@ -3,13 +3,13 @@
 
 #let current-chapter() = counter(heading.where(level: 1)).get().at(0, default: 0)
 
-#let sectioned-numbering(n) = context {
+#let chapter-numbering(n) = context {
   numbering("1.1", current-chapter(), n)
 }
 
 #let equation-numbering(n) = context {
-  let section = current-chapter()
-  "(" + str(section) + "." + str(n) + ")"
+  let chapter = current-chapter()
+  "(" + str(chapter) + "." + str(n) + ")"
 }
 
 // The faculty rules require 1.5 line spacing for the 12 pt body text. In a
@@ -21,7 +21,7 @@
 // is 1356 / 2048 em, so the leading is the baseline distance minus the cap
 // height.
 #let body-leading = (1.5 * (1825 + 443 + 87) - 1356) / 2048 * 1em
-#let body-par-spacing = body-leading
+#let body-paragraph-spacing = body-leading
 // Captions, table cells, listings and footnotes are not body text and keep the
 // tighter spacing they had before the body text moved to 1.5 spacing.
 #let compact-leading = 0.7em
@@ -80,7 +80,7 @@
   #set text(lang: lang)
   #set par(
     justify: true,
-    spacing: body-par-spacing,
+    spacing: body-paragraph-spacing,
     leading: body-leading,
     first-line-indent: (amount: 0.85cm, all: true),
   )
@@ -191,14 +191,14 @@
   )
   set par(
     justify: true,
-    spacing: body-par-spacing,
+    spacing: body-paragraph-spacing,
     leading: body-leading,
     first-line-indent: (amount: 0.85cm, all: true),
   )
   set list(indent: 0.85cm)
   set enum(indent: 0.85cm)
   set heading(numbering: "1.1.1.")
-  set figure(numbering: sectioned-numbering)
+  set figure(numbering: chapter-numbering)
   set math.equation(numbering: equation-numbering)
   set table(
     stroke: 0.5pt,
