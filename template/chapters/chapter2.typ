@@ -36,11 +36,7 @@ przenikaniem ciepła opisywanym w literaturze @snyder-toberer-2008.
   caption: [Punkty pomiarowe wykorzystane do wyznaczenia charakterystyki],
 )
 
-Wybrane punkty skupiono w pobliżu minimum charakterystyki, tak aby przykład
-pokazywał zarówno odcinek malejący, jak i obszar, w którym dalszy wzrost prądu
-nie poprawia już wyniku temperaturowego. Zagadnienia związane z ograniczeniami
-obciążenia cieplnego i odprowadzaniem ciepła są szeroko omawiane w dokumentacji
-praktycznej modułów termoelektrycznych @ferrotec-guide. Niepewność
+Punkty pomiarowe leżą gęściej w pobliżu minimum. Pokazują spadek temperatury i zakres, w którym dalsze zwiększanie prądu już jej nie obniża. Dokumentacja modułów termoelektrycznych omawia ograniczenia obciążenia cieplnego i odprowadzania ciepła @ferrotec-guide. Niepewność
 rozszerzona#footnote[
   W prezentacjach laboratoryjnych często podaje się niepewność rozszerzoną dla
   współczynnika rozszerzenia k = 2, odpowiadającą w przybliżeniu poziomowi

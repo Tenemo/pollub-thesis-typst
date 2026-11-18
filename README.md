@@ -1,10 +1,10 @@
 # Lublin University of Technology (pollub) thesis Typst template
 
-Your thesis is in Polish? Jump to: [polski](#polski)
+[Instrukcja po polsku](#polski)
 
 ## English
 
-`pollub-thesis` is a Typst thesis template for the Lublin University of Technology, specifically Wydział Elektrotechniki i Informatyki. It provides a WEII title page, a bilingual abstract page, chapter-based numbering for figures/tables/listings/equations, and thesis layout defaults aligned with the faculty guidelines.
+`pollub-thesis` is a Typst template for theses at Wydział Elektrotechniki i Informatyki, Lublin University of Technology. It provides a WEII title page, bilingual abstracts and layout defaults based on faculty guidelines. It numbers figures, tables, listings and equations by chapter.
 
 Current rendered preview: [template-preview.pdf](./template-preview.pdf). Regenerate it and the thumbnail from the repository root after template changes:
 
@@ -32,7 +32,7 @@ typst compile --root . --input local-template-preview=true --pages 1 --ppi 144 t
 - `main-lang` controls the body language and localized labels
 - `screen-mode` defaults to `false`, the mirrored print and binding margins the faculty requires; set it to `true` for symmetric side margins on screen
 - `field-of-study` and `specialization` are printed as given, so include the faculty wording, for example `na kierunku …` and `na bloku dyplomowania …` (master's) or `w specjalności …` (engineering)
-- the title page follows the faculty model (Załącznik 5): the degree label, the field of study and diploma block lines, the Polish title, then the English title in the same size, the authors, the supervisor, and the city and year; `title-primary` is the title in `main-lang` and `title-secondary` the title in the other language, and the Polish one is always printed first
+- The title page follows the faculty model (Załącznik 5). It lists the degree, field of study and diploma block, then the Polish and English titles in the same size, the authors, the supervisor, and the city and year. Set `title-primary` in `main-lang` and `title-secondary` in the other language. The Polish title always appears first.
 - the faculty model has a single degree label, for example `Praca dyplomowa magisterska`, and a supervisor line `Promotor` followed by the title, degree and name; the rules give no English wording, so an English thesis supplies its own labels, and `degree-label-secondary` is an optional second degree label in the other language
 - a degree label or field of study that wraps pushes the blocks below it down instead of overlapping them
 - `authors` expects 1 to 3 records with `name` and `album-number`
@@ -84,7 +84,7 @@ The faculty logo in `assets/weii-logo.jpg` belongs to Lublin University of Techn
 
 ## Polski
 
-`pollub-thesis` to szablon pracy dyplomowej w Typst dla Politechniki Lubelskiej, a dokładniej dla Wydziału Elektrotechniki i Informatyki. Zapewnia stronę tytułową WEII, dwujęzyczną stronę ze streszczeniami, numerację rysunków/tabel/listingów/równań w obrębie rozdziałów oraz domyślne ustawienia układu pracy zgodne z wytycznymi wydziału.
+`pollub-thesis` to szablon Typst dla prac dyplomowych na Wydziale Elektrotechniki i Informatyki Politechniki Lubelskiej. Zawiera wydziałową stronę tytułową i stronę ze streszczeniami w obu językach. Domyślny układ pracy odpowiada wytycznym wydziału. Rysunki, tabele, listingi i równania mają numerację w obrębie rozdziału.
 
 Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-preview.pdf). Po zmianach w szablonie wygeneruj go wraz z miniaturą poleceniami z sekcji angielskiej, uruchamianymi w katalogu głównym repozytorium.
 
@@ -107,7 +107,7 @@ Aktualny podgląd wyrenderowanego szablonu: [template-preview.pdf](./template-pr
 - `main-lang` steruje językiem głównej treści i lokalizowanymi etykietami
 - `screen-mode` domyślnie ma wartość `false`, czyli lustrzane marginesy do druku i oprawy wymagane przez wydział; ustaw `true`, aby uzyskać symetryczne marginesy boczne na ekranie
 - `field-of-study` i `specialization` są drukowane bez zmian, więc podaj pełne sformułowanie z wzoru wydziału, np. `na kierunku …` i `na bloku dyplomowania …` (praca magisterska) albo `w specjalności …` (praca inżynierska)
-- strona tytułowa odpowiada wzorowi wydziału (Załącznik 5): rodzaj pracy, wiersze kierunku i bloku dyplomowania, tytuł polski, a pod nim tytuł angielski tej samej wielkości, autorzy, promotor oraz miejscowość i rok; `title-primary` to tytuł w języku `main-lang`, a `title-secondary` w drugim języku, przy czym tytuł polski zawsze jest pierwszy
+- Strona tytułowa ma układ zgodny ze wzorem wydziału (Załącznik 5). Po rodzaju pracy, kierunku i bloku dyplomowania następują tytuły polski i angielski tej samej wielkości, autorzy, promotor oraz miejscowość i rok. W `title-primary` podaj tytuł w języku `main-lang`, a w `title-secondary` w drugim języku. Tytuł polski zawsze pojawia się pierwszy.
 - wzór wydziału ma jeden napis z rodzajem pracy, np. `Praca dyplomowa magisterska`, oraz wiersz `Promotor` z tytułem, stopniem, imieniem i nazwiskiem; zasady nie podają brzmienia angielskiego, więc praca w języku angielskim podaje własne etykiety, a `degree-label-secondary` to opcjonalny drugi napis w drugim języku
 - zawijający się rodzaj pracy lub kierunek przesuwa niższe bloki w dół zamiast na nie nachodzić
 - `authors` oczekuje od 1 do 3 rekordów z polami `name` i `album-number`

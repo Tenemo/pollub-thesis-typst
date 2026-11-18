@@ -8,11 +8,9 @@ otrzymanego punktu pracy zależy zarówno od właściwości cieplnych modułu, j
 od sposobu wyznaczania temperatury strony zimnej
 @nist-thermoelectric-measurements.
 
-Ten dokument startowy celowo pozostaje krótki. Jego zadaniem jest pokazanie
-realistycznej struktury pracy magisterskiej dla WEII#footnote[
+Przykład pokazuje układ pracy magisterskiej dla WEII#footnote[
   WEII to Wydział Elektrotechniki i Informatyki Politechniki Lubelskiej.
-], pozostawiając autorowi dobór właściwego zakresu badań, układu rozdziałów i
-narracji naukowej.
+]. Autor określa zakres badań, dobiera rozdziały i sposób przedstawienia wyników.
 
 Szablon pokazuje również przypisy dolne w zwykłym akapicie#footnote[
   Taki przypis może rozwijać skrót, doprecyzowywać założenie albo wskazywać
@@ -20,7 +18,5 @@ Szablon pokazuje również przypisy dolne w zwykłym akapicie#footnote[
 ], tak aby autor mógł szybko sprawdzić ich numerację, łamanie wierszy i
 rozmieszczenie na stronie.
 
-Drugi rozdział zawiera przykładowy wykres, tabelę i listing, aby pokazać układ
-elementów, numerację w obrębie rozdziału oraz bibliografię renderowaną jako
-jedna lista zgodna z APA 7.
+W drugim rozdziale wykres, tabela i listing pokazują rozmieszczenie elementów i ich numerację w obrębie rozdziału. Bibliografia ma postać jednej listy zgodnej z APA 7.
 ]
