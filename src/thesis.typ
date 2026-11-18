@@ -12,18 +12,10 @@
   "(" + str(chapter) + "." + str(n) + ")"
 }
 
-// The faculty rules require 1.5 line spacing for the 12 pt body text. In a
-// word processor, single spacing of Times New Roman is its ascender plus
-// descender plus line gap, (1825 + 443 + 87) / 2048 em, so 1.5 spacing puts
-// the baselines 1.5 times that apart, about 20.7 pt at 12 pt. Typst's leading
-// is measured from the baseline of one line to the cap height of the next
-// (default `top-edge` and `bottom-edge`), and the cap height of Times New Roman
-// is 1356 / 2048 em, so the leading is the baseline distance minus the cap
-// height.
+// Times New Roman metrics are in 2048 units/em: ascender 1825, descender 443, line gap 87, cap height 1356.
+// For the required 1.5 baseline spacing, Typst leading subtracts cap height from that baseline distance.
 #let body-leading = (1.5 * (1825 + 443 + 87) - 1356) / 2048 * 1em
 #let body-paragraph-spacing = body-leading
-// Captions, table cells, listings and footnotes are not body text and keep the
-// tighter spacing they had before the body text moved to 1.5 spacing.
 #let compact-leading = 0.7em
 #let abstract-gap = 2em
 #let screen-side-margin = 2.75cm

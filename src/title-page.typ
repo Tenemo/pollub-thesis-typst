@@ -1,6 +1,5 @@
 #import "i18n.typ": apply-polish-typography
 
-// Overall page
 #let title-page-font = "Times New Roman"
 #let title-page-text-weight = 400
 #let title-page-default-size = 12pt
@@ -9,7 +8,6 @@
 #let title-page-paragraph-spacing = 0pt
 #let title-page-first-line-indent = (amount: 0pt, all: true)
 
-// Header image
 #let default-title-header-image = image(
   "../assets/weii-logo.jpg",
   width: 7.45cm,
@@ -26,14 +24,12 @@
 // starts at its usual position, or lower when the block above it is taller, so
 // a label that wraps never runs into the next block.
 
-// Degree label
 #let title-page-degree-top = 7cm
 #let title-page-degree-primary-size = 40pt
 #let title-page-degree-secondary-size = 20pt
 #let title-page-degree-primary-to-secondary-gap = 0.4cm
 #let title-page-degree-to-study-gap = 0.25cm
 
-// Study details
 #let title-page-study-top = 9.2cm
 #let title-page-study-size = 12pt
 #let title-page-study-field-to-specialization-gap = 0.3cm
@@ -47,7 +43,6 @@
 #let title-page-title-gap = 0.8cm
 #let title-page-title-to-author-gap = 1.7cm
 
-// Authors
 #let title-page-author-top = 17cm
 #let title-page-author-name-size = 16pt
 #let title-page-author-album-size = 12pt
@@ -60,11 +55,9 @@
 )
 #let title-page-author-slot-count = title-page-author-slot-authors.len()
 
-// Supervisor
 #let title-page-supervisor-top = 23cm
 #let title-page-supervisor-size = 12pt
 
-// Footer
 #let title-page-footer-top = 25cm
 #let title-page-footer-size = 9pt
 #let title-page-supervisor-to-footer-gap = 0.5cm
