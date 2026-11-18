@@ -6,12 +6,12 @@
 #let title-page-default-size = 12pt
 #let title-page-content-left = -0.3cm
 #let title-page-content-width = 15.2cm
-#let title-page-par-spacing = 0pt
+#let title-page-paragraph-spacing = 0pt
 #let title-page-first-line-indent = (amount: 0pt, all: true)
 
 // Header image
 #let default-title-header-image = image(
-  "../assets/weii_logo.jpg",
+  "../assets/weii-logo.jpg",
   width: 7.45cm,
 )
 #let title-page-header-image-top = -0.5cm
@@ -71,7 +71,7 @@
   #set text(font: title-page-font, size: size, weight: title-page-text-weight)
   #set par(
     justify: false,
-    spacing: title-page-par-spacing,
+    spacing: title-page-paragraph-spacing,
     leading: leading,
     first-line-indent: title-page-first-line-indent,
   )
@@ -81,7 +81,7 @@
 #let authors-frame(authors, lang) = box(width: title-page-content-width)[
   #set par(
     justify: false,
-    spacing: title-page-par-spacing,
+    spacing: title-page-paragraph-spacing,
     first-line-indent: title-page-first-line-indent,
   )
   #for (index, author) in authors.enumerate() [
@@ -120,7 +120,7 @@
   #context {
     set par(
       justify: false,
-      spacing: title-page-par-spacing,
+      spacing: title-page-paragraph-spacing,
       first-line-indent: title-page-first-line-indent,
     )
     set text(font: title-page-font, size: title-page-default-size, lang: main-lang, weight: title-page-text-weight)
@@ -136,7 +136,7 @@
     let degree-frame = box(width: title-page-content-width)[
       #set par(
         justify: false,
-        spacing: title-page-par-spacing,
+        spacing: title-page-paragraph-spacing,
         first-line-indent: title-page-first-line-indent,
       )
       #let has-degree-label-primary = has-title-page-content(degree-label-primary)
@@ -160,7 +160,7 @@
       #set text(font: title-page-font, size: title-page-study-size, weight: title-page-text-weight)
       #set par(
         justify: false,
-        spacing: title-page-par-spacing,
+        spacing: title-page-paragraph-spacing,
         leading: title-page-study-leading,
         first-line-indent: title-page-first-line-indent,
       )
